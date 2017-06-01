@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardText, CardHeader} from 'material-ui/Card';
 import {publicationYearsBig as publicationYearsMockData} from '../../../mock/data/academic/publicationYears';
+import{Shortcuts} from '../../../modules/Shortcuts';
 
 import {AuthorsPublicationsPerYearChart} from 'uqlibrary-react-toolbox';
 import './Dashboard.scss';
-
 
 class Dashboard extends React.Component {
     static propTypes = {
@@ -49,6 +49,10 @@ class Dashboard extends React.Component {
                         <br />
                         <div>
                             <AuthorsPublicationsPerYearChart rawData={publicationYearsMockData} yAxisTitle="Total publications"/>
+                        </div>
+
+                        <div>
+                            <Shortcuts name="'TODO_ITEM" handler={this._handleShortcuts} />
                         </div>
                     </CardText>
 
