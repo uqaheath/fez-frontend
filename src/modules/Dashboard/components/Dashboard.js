@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardText, CardHeader} from 'material-ui/Card';
-import {publicationYearsBig as publicationYearsMockData} from '../../../mock/data/academic/publicationYears';
-import{Shortcuts} from '../../../modules/Shortcuts';
+import {publicationYearsBig as publicationYearsMockData} from 'mock/data/academic/publicationYears';
+import {keyboardShortcuts} from 'modules/Shortcuts';
 
 import {AuthorsPublicationsPerYearChart} from 'uqlibrary-react-toolbox';
 import './Dashboard.scss';
@@ -52,7 +52,9 @@ class Dashboard extends React.Component {
                         </div>
 
                         <div>
-                            <Shortcuts name="'TODO_ITEM" handler={this._handleShortcuts} />
+                            <div id="app">Before</div>
+                            <keyboardShortcuts />
+                            <div id="app">After</div>
                         </div>
                     </CardText>
 

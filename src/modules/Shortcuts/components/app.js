@@ -1,88 +1,72 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import Shortcuts from 'react-shortcuts';
+// import Shortcuts from 'react-shortcuts';
 
-Shortcuts = React.createFactory(Shortcuts);
-const {div, h1, p} = React.DOM;
+export default class keyboardShortcuts extends Component {
 
-export default React.createClass({
+    static propTypes = {
+        shortcuts: PropTypes.object,
+    };
 
-    childContextTypes: {
-        shortcuts: PropTypes.object.isRequired,
-    },
+    constructor(props) {
+        super(props);
 
-    getInitialState() {
-        return {who: 'Nobody'};
-    },
-
-    getChildContext() {
-        return {shortcuts: this.props.shortcuts};
-    },
+        this.state = {
+            who: 'nobody'
+        };
+    }
 
     _handleShortcuts(command) {
         switch (command) {
             case 'MOVE_LEFT':
-                return this.setState({who: 'Hemingway - left'});
+                this.setState({who: 'Hemingway - left'});
+                break;
             case 'DELETE':
-                return this.setState({who: 'Hemingway - delete'});
+                this.setState({who: 'Hemingway - delete'});
+                break;
             case 'MOVE_RIGHT':
-                return this.setState({who: 'Hemingway - right'});
+                this.setState({who: 'Hemingway - right'});
+                break;
             case 'MOVE_UP':
-                return this.setState({who: 'Hemingway - top'});
+                this.setState({who: 'Hemingway - top'});
+                break;
+            default:
+                this.setState({who: 'Hemingway - default'});
+                break;
         }
-    },
+    }
 
     _handleShortcuts2(command) {
         switch (command) {
             case 'MOVE_LEFT':
-                return this.setState({who: 'Franz Kafka - left'});
+                this.setState({who: 'Franz Kafka - left'});
+                break;
             case 'DELETE':
-                return this.setState({who: 'Franz Kafka - delete'});
+                this.setState({who: 'Franz Kafka - delete'});
+                break;
             case 'MOVE_RIGHT':
-                return this.setState({who: 'Franz Kafka - right'});
+                this.setState({who: 'Franz Kafka - right'});
+                break;
             case 'MOVE_UP':
-                return this.setState({who: 'Franz Kafka - top'});
+                this.setState({who: 'Franz Kafka - top'});
+                break;
+            default:
+                this.setState({who: 'Franz Kafka - default'});
+                break;
         }
-    },
+    }
 
-    _handleRoot(command) {
+    _handleRoot() {
         this.setState({who: 'Root shortcuts component'});
-    },
+    }
 
     render() {
+        console.log('Keyboard Shortcuts : ', this.state.who);
         return (
-
-            div({className: 'root'},
-
-                h1({className: 'who'}, this.state.who),
-
-                Shortcuts({
-                    name: this.constructor.displayName,
-                    handler: this._handleShortcuts,
-                    targetNodeSelector: '#app',
-                    className: 'content',
-                },
-                    div(null,
-                        h1(null, 'Hemingway'),
-                        p(null, 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.')
-                    )
-                ),
-
-                Shortcuts({
-                    name: this.constructor.displayName,
-                    handler: this._handleShortcuts2,
-                    stopPropagation: true,
-                    className: 'content',
-                },
-
-                    div(null,
-                        h1(null, 'Franz Kafka'),
-                        p(null, 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.')
-                    )
-                )
-            )
-
+            <div>
+                Middle
+            </div>
         );
-    },
-});
+    }
+}

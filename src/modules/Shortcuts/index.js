@@ -1,1 +1,1 @@
-export {default as Shortcuts} from './components/app.js';
+export {default as keyboardShortcuts} from './components/app.js';
