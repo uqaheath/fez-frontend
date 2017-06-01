@@ -52,9 +52,7 @@ class Dashboard extends React.Component {
                         </div>
 
                         <div>
-                            <div id="app">Before</div>
                             <KeyboardShortcuts />
-                            <div id="app">After</div>
                         </div>
                     </CardText>
 

@@ -31,27 +31,32 @@ export default class KeyboardShortcuts extends Component {
     _handleShortcuts = (action) => {
         switch (action) {
             case 'MOVE_LEFT':
-                console.log('moving left');
+                this.setState({who: 'moving left'});
                 break;
             case 'MOVE_RIGHT':
-                console.log('moving right');
+                this.setState({who: 'moving right'});
                 break;
             case 'MOVE_UP':
-                console.log('moving up');
+                this.setState({who: 'moving up'});
                 break;
             case 'COPY':
-                console.log('copying stuff');
+                this.setState({who: 'copying stuff'});
+                break;
+            case 'DELETE':
+                this.setState({who: 'deleting stuff'});
                 break;
             default:
-                console.log('dunno');
+                this.setState({who: 'dunno'});
                 break;
         }
     };
 
     render() {
-        console.log('xxx', this.state.who);
         return (
             <div>
+                {this.state.who !== '' && (
+                    <div style={{fontSize: '24px'}}>You pressed <i>{this.state.who}</i></div>
+                )}
                 <Shortcuts name="TODO_ITEM" handler={this._handleShortcuts}>
                 <div>
                     <h1>Hemingway</h1>
