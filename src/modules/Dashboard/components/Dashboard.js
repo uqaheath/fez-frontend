@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardText, CardHeader} from 'material-ui/Card';
 import {publicationYearsBig as publicationYearsMockData} from 'mock/data/academic/publicationYears';
-import {keyboardShortcuts} from 'modules/Shortcuts';
+import {KeyboardShortcuts} from 'modules/Shortcuts';
 
 import {AuthorsPublicationsPerYearChart} from 'uqlibrary-react-toolbox';
 import './Dashboard.scss';
@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
 
                         <div>
                             <div id="app">Before</div>
-                            <keyboardShortcuts />
+                            <KeyboardShortcuts />
                             <div id="app">After</div>
                         </div>
                     </CardText>

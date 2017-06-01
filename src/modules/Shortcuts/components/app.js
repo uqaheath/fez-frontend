@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-// import Shortcuts from 'react-shortcuts';
+import keymap from './keymap';
+import { ShortcutManager } from 'react-shortcuts';
 
-export default class keyboardShortcuts extends Component {
 
-    static propTypes = {
-        shortcuts: PropTypes.object,
+const shortcutManager = new ShortcutManager();
+shortcutManager.setKeymap(keymap);
+import { Shortcuts } from 'react-shortcuts';
+
+export default class KeyboardShortcuts extends Component {
+
+    static childContextTypes = {
+        shortcuts: PropTypes.object.isRequired
     };
+
 
     constructor(props) {
         super(props);
@@ -17,55 +24,40 @@ export default class keyboardShortcuts extends Component {
         };
     }
 
-    _handleShortcuts(command) {
-        switch (command) {
-            case 'MOVE_LEFT':
-                this.setState({who: 'Hemingway - left'});
-                break;
-            case 'DELETE':
-                this.setState({who: 'Hemingway - delete'});
-                break;
-            case 'MOVE_RIGHT':
-                this.setState({who: 'Hemingway - right'});
-                break;
-            case 'MOVE_UP':
-                this.setState({who: 'Hemingway - top'});
-                break;
-            default:
-                this.setState({who: 'Hemingway - default'});
-                break;
-        }
+    getChildContext() {
+        return { shortcuts: shortcutManager };
     }
 
-    _handleShortcuts2(command) {
-        switch (command) {
+    _handleShortcuts = (action) => {
+        switch (action) {
             case 'MOVE_LEFT':
-                this.setState({who: 'Franz Kafka - left'});
-                break;
-            case 'DELETE':
-                this.setState({who: 'Franz Kafka - delete'});
+                console.log('moving left');
                 break;
             case 'MOVE_RIGHT':
-                this.setState({who: 'Franz Kafka - right'});
+                console.log('moving right');
                 break;
             case 'MOVE_UP':
-                this.setState({who: 'Franz Kafka - top'});
+                console.log('moving up');
+                break;
+            case 'COPY':
+                console.log('copying stuff');
                 break;
             default:
-                this.setState({who: 'Franz Kafka - default'});
+                console.log('dunno');
                 break;
         }
-    }
-
-    _handleRoot() {
-        this.setState({who: 'Root shortcuts component'});
-    }
+    };
 
     render() {
-        console.log('Keyboard Shortcuts : ', this.state.who);
+        console.log('xxx', this.state.who);
         return (
             <div>
-                Middle
+                <Shortcuts name="TODO_ITEM" handler={this._handleShortcuts}>
+                <div>
+                    <h1>Hemingway</h1>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                </div>
+                </Shortcuts>
             </div>
         );
     }
