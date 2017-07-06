@@ -6,12 +6,12 @@ export {
     TOKEN_NAME
 } from './general';
 
-export {default as api} from './axios';
+export { api, generateCancelToken } from './axios';
 
-export {default as theme} from './theme';
+export { default as theme } from './theme';
 
 export * as validation from './validation';
-export {default as locale} from './locale';
+export { default as locale } from './locale';
 
-export {defaultMenuItems, adminMenuItems, researcherMenuItems} from './menu';
+export { defaultMenuItems, adminMenuItems, researcherMenuItems } from './menu';
 
