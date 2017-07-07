@@ -5,8 +5,8 @@ import Snackbar from 'material-ui/Snackbar';
 
 import {AppLoader} from 'uqlibrary-react-toolbox';
 import {MenuDrawer} from 'uqlibrary-react-toolbox';
-
 import {HelpDrawer} from 'uqlibrary-react-toolbox';
+
 import {defaultMenuItems, researcherMenuItems} from 'config';
 import {locale} from 'config';
 import AuthButton from 'modules/AuthButton';
@@ -18,7 +18,6 @@ import {AddRecord} from 'modules/AddRecord';
 import {StaticPage} from 'uqlibrary-react-toolbox';
 import {Browse} from 'modules/Browse';
 
-
 import '../../../sass/_appbar.scss';
 
 export default class App extends React.Component {
@@ -26,12 +25,12 @@ export default class App extends React.Component {
     static propTypes = {
         error: React.PropTypes.object,
         account: React.PropTypes.object,
-        loaded: React.PropTypes.bool.isRequired,
+        accountLoaded: React.PropTypes.bool.isRequired,
         loadAccount: React.PropTypes.func.isRequired,
         menuDrawerOpen: React.PropTypes.bool.isRequired,
         hideSnackbar: React.PropTypes.func.isRequired,
         snackbar: React.PropTypes.object.isRequired,
-        toggleMenuDrawer: React.PropTypes.func.isRequired
+        toggleDrawer: React.PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -64,14 +63,14 @@ export default class App extends React.Component {
     }
 
     toggleDrawer = () => {
-        this.props.toggleMenuDrawer(!this.props.menuDrawerOpen);
+        this.props.toggleDrawer(!this.props.menuDrawerOpen);
     };
 
     render() {
         const {
             error,
             account,
-            loaded,
+            accountLoaded,
             menuDrawerOpen,
             snackbar,
             hideSnackbar
@@ -84,7 +83,7 @@ export default class App extends React.Component {
         const titleStyle = docked ? { paddingLeft: 320 } : {};
         const container = docked ? { paddingLeft: 340 } : {};
 
-        const isAuthorizedUser = loaded === true && account !== null && account.get('mail');
+        const isAuthorizedUser = accountLoaded === true && account !== null && account.get('mail');
         const components = { Browse, StaticPage, Dashboard, Research, AddRecord };
         const landingPage =  isAuthorizedUser ? Dashboard : Browse;
         const menuItems = isAuthorizedUser ? [...researcherMenuItems(locale, account.get('mail'), components), ...defaultMenuItems(locale, components)] : defaultMenuItems(locale, components);
@@ -93,7 +92,7 @@ export default class App extends React.Component {
 
         return (
             <div className="layout-fill">
-                {!loaded ? (
+                {!accountLoaded ? (
                     <AppLoader title={locale.global.title} logoImage={locale.global.logo} logoText={locale.global.title} />
                     ) : (
                     <div className="layout-fill align-stretch">
@@ -108,7 +107,7 @@ export default class App extends React.Component {
                             onLeftIconButtonTouchTap={this.toggleDrawer}
                             iconElementRight={
                                 <div style={{marginTop: '-10px'}}>
-                                    <AuthButton loaded={loaded} account={account}/>
+                                    <AuthButton loaded={accountLoaded} account={account}/>
                                 </div>
                             }
                         />
@@ -123,9 +122,10 @@ export default class App extends React.Component {
                         <div className="content-container" style={container}>
                             <Switch>
                                 <Route path="/" exact component={landingPage} />
-                                {menuItems.map((route, index) => (
-                                    <Route key={index} {...route} />
-                                ))}
+                                {menuItems.map((route, index) => {
+                                    console.log(route, index);
+                                    return <Route key={index} {...route} />;
+                                })}
                             </Switch>
                         </div>
 
@@ -135,7 +135,7 @@ export default class App extends React.Component {
                             autoHideDuration={4000}
                             onRequestClose={hideSnackbar} />
 
-                         <HelpDrawer />
+                        <HelpDrawer/>
                     </div>
                 )}
             </div>

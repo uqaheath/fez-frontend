@@ -8,7 +8,7 @@ const AppContainer = connect(state => {
     return {
         error: appState.get('error'),
         account: appState.get('account'),
-        loaded: appState.get('accountLoaded'),
+        accountLoaded: appState.get('accountLoaded'),
         menuDrawerOpen: appState.get('menuDrawerOpen'),
         snackbar: appState.get('snackbar')
     };
@@ -16,7 +16,7 @@ const AppContainer = connect(state => {
     return {
         hideSnackbar: () => dispatch(hideSnackbar()),
         loadAccount: () => dispatch(loadAccount()),
-        toggleMenuDrawer: open => dispatch(toggleDrawer(open))
+        toggleDrawer: open => dispatch(toggleDrawer(open))
     };
 })(App);
 
