@@ -3,8 +3,17 @@
  */
 import publicationsearch from './publicationsearch';
 import stepper from './stepper';
+import app from './app';
+import form from './form';
+import helpDrawer from './help-drawer';
+import root from './root';
+
 
 export default {
+    form,
+    helpDrawer,
     stepper,
-    publicationsearch
+    publicationsearch,
+    app,
+    root
 };
