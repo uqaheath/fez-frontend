@@ -67,7 +67,6 @@ const reducers = {
         }
     },
     publicationSearchResult(state = Immutable.Map(), action) {
-        console.log(action);
         switch (action.type) {
             case SEARCH_FINISHED:
                 return Immutable.fromJS(action.payload);

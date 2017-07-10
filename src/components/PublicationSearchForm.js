@@ -7,7 +7,7 @@ import { HelpIcon, TextField } from 'uqlibrary-react-toolbox';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import provide from 'react-redux-provide';
-import './PublicationSearchForm.scss';
+import '../sass/PublicationSearchForm.scss';
 
 @provide
 class PublicationSearchForm extends Component {

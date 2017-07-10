@@ -6,20 +6,22 @@ import Snackbar from 'material-ui/Snackbar';
 import {AppLoader} from 'uqlibrary-react-toolbox';
 import {MenuDrawer} from 'uqlibrary-react-toolbox';
 import {HelpDrawer} from 'uqlibrary-react-toolbox';
+import {StaticPage} from 'uqlibrary-react-toolbox';
 
-import {defaultMenuItems, researcherMenuItems} from 'config';
-import {locale} from 'config';
-import AuthButton from 'modules/AuthButton';
+import {defaultMenuItems, researcherMenuItems} from '../config';
+import {locale} from '../config';
+import AuthButton from './AuthButton';
 
 // Pages
-import {Dashboard} from 'modules/Dashboard';
-import {Research} from 'modules/Research';
-import {AddRecord} from 'modules/AddRecord';
-import {StaticPage} from 'uqlibrary-react-toolbox';
-import {Browse} from 'modules/Browse';
+import Dashboard from './Dashboard';
+import Research from './Research';
+import AddRecord from './AddRecord';
+import Browse from './Browse';
 
-import '../../../sass/_appbar.scss';
+import '../sass/_appbar.scss';
+import provide from 'react-redux-provide';
 
+@provide
 export default class App extends React.Component {
 
     static propTypes = {
@@ -122,10 +124,9 @@ export default class App extends React.Component {
                         <div className="content-container" style={container}>
                             <Switch>
                                 <Route path="/" exact component={landingPage} />
-                                {menuItems.map((route, index) => {
-                                    console.log(route, index);
-                                    return <Route key={index} {...route} />;
-                                })}
+                                {menuItems.map((route, index) => (
+                                    <Route key={index} {...route} />
+                                ))}
                             </Switch>
                         </div>
 

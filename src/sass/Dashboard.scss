@@ -1,4 +1,4 @@
-@import '~uqlibrary-react-toolbox/sass/variables';
+@import '../../node_modules/uqlibrary-react-toolbox/sass/variables';
 
 .grey-cover {
   z-index: 2;
@@ -12,7 +12,7 @@
 }
 
 .image-cover {
-  background-image: url('../../../../public/images/dashboard_cover.jpg');
+  background-image: url('../../public/images/dashboard_cover.jpg');
   background-size: cover;
   background-position: 0;
   overflow: hidden;

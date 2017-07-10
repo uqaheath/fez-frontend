@@ -3,7 +3,6 @@
  */
 // Repositories
 import {getAccount as apiGetAccount} from 'repositories/account';
-import {LOCATION_CHANGE} from 'connected-react-router';
 import Immutable from 'immutable';
 
 export const APP_ACCOUNT_LOADING = 'APP_ACCOUNT_LOADING';
@@ -123,9 +122,8 @@ const reducers = {
         }
     },
     menuDrawerOpen(state = false, action) {
+        console.log(action.type);
         switch (action.type) {
-            case LOCATION_CHANGE:
-                return false;
             case APP_MENU_DRAWER_TOGGLE:
                 return action.payload;
             default:
@@ -141,6 +139,7 @@ const reducers = {
         }
     },
     accountLoaded(state = false, action) {
+        console.log(action);
         switch (action.type) {
             case APP_LOADING_ERROR:
             case APP_ACCOUNT_LOADED:

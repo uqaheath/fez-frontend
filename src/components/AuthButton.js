@@ -2,9 +2,9 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import SocialPersonOutline from 'material-ui/svg-icons/social/person-outline';
 import SocialPerson from 'material-ui/svg-icons/social/person';
-import './AuthButton.scss';
+import '../sass/AuthButton.scss';
 import PropTypes from 'prop-types';
-import {AUTH_URL_LOGIN, AUTH_URL_LOGOUT} from '../../config/general';
+import {AUTH_URL_LOGIN, AUTH_URL_LOGOUT} from '../config/general';
 
 class AuthButton extends React.Component {
 
@@ -26,7 +26,6 @@ class AuthButton extends React.Component {
          * Logs in user into the application
          * @void redirects to login url
          */
-
         function login() {
             const returnUrl = window.btoa(window.location.href);
             window.location.href = `${AUTH_URL_LOGIN}?return=${returnUrl}`;

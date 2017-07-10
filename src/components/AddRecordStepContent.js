@@ -4,11 +4,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PublicationSearchForm from '../components/PublicationSearchForm';
-import provide from 'react-redux-provide';
 import { locale } from '../config';
 import { InlineLoader } from 'uqlibrary-react-toolbox';
 import SearchResults from '../components/SearchResults';
 import NoMatchingRecords from '../components/NoMatchingRecords';
+import provide from 'react-redux-provide';
 
 const STEP_1 = 0;
 const STEP_2 = 1;

@@ -8,7 +8,6 @@ import form from './form';
 import helpDrawer from './help-drawer';
 import root from './root';
 
-
 export default {
     form,
     helpDrawer,

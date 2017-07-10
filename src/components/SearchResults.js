@@ -5,7 +5,7 @@ import { HelpIcon } from 'uqlibrary-react-toolbox';
 import PropTypes from 'prop-types';
 import provide from 'react-redux-provide';
 import SearchResultsRow from './SearchResultsRow';
-import './ClaimPublication.scss';
+import '../sass/ClaimPublication.scss';
 
 @provide
 class SearchResults extends Component {

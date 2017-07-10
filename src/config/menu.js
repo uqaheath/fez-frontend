@@ -23,6 +23,13 @@ export const researcherMenuItems = (locale, email, components) => [
         component: components.AddRecord
     },
     {
+        linkTo: '/browse',
+        primaryText: locale.menu.browse.primaryText,
+        secondaryText: locale.menu.browse.secondaryText,
+        path: '/browse',
+        component: components.Browse
+    },
+    {
         divider: true,
         path: '/' + (new Date()).getTime() // TODO: fix: workaround: empty Route is constructed from divider
     }
@@ -54,13 +61,6 @@ export const adminMenuItems = (locale, email, components) => [
 ];
 
 export const defaultMenuItems = (locale, components) => [
-    {
-        linkTo: '/browse',
-        primaryText: locale.menu.browse.primaryText,
-        secondaryText: locale.menu.browse.secondaryText,
-        path: '/browse',
-        render: () => components.Browse(locale.pages.browse)
-    },
     {
         linkTo: '/search',
         path: '/search',
