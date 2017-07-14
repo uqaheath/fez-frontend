@@ -1,4 +1,4 @@
-import { validation, locale } from '../config';
+import { validation, locale } from '../config/index';
 
 export const isPartialDOIValue = value => {
     const isPartialDOI = /^10\..*/;

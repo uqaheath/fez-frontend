@@ -3,12 +3,16 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import PublicationSearchForm from '../components/PublicationSearchForm';
 import { locale } from '../config';
 import { InlineLoader } from 'uqlibrary-react-toolbox';
-import SearchResults from '../components/SearchResults';
-import NoMatchingRecords from '../components/NoMatchingRecords';
+
+import PublicationSearchForm from './PublicationSearchForm';
+import SearchResults from './SearchResults';
+import NoMatchingRecords from './NoMatchingRecords';
+import PublicationTypeForm from './PublicationTypeForm';
+
 import provide from 'react-redux-provide';
+import publicationtypes from '../providers/publicationtypes';
 
 const STEP_1 = 0;
 const STEP_2 = 1;
@@ -75,8 +79,19 @@ export default class AddRecordStepContent extends React.Component {
 
                 );
             case STEP_3:
+                const publicationTypeInformation = locale.publicationTypeForm;
+
                 return (
-                    <div>Step 3</div>
+                    <div>
+                        <PublicationTypeForm
+                            providers={{ publicationtypes }}
+                            title={publicationTypeInformation.title}
+                            explanationText={publicationTypeInformation.explanationText}
+                            help={publicationTypeInformation.help}
+                            maxSearchResults={publicationTypeInformation.maxSearchResults}
+                            publicationTypeLabel={publicationTypeInformation.publicationTypeLabel}
+                        />
+                    </div>
                 );
             default:
                 return 'Error Message';

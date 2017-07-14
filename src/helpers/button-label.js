@@ -1,7 +1,7 @@
 /**
  * Created by uqvasai on 5/07/2017.
  */
-import { isDOIValue, isPartialDOIValue, isPubMedValue } from '../providers/validator';
+import { isDOIValue, isPartialDOIValue, isPubMedValue } from './validator';
 import { locale } from '../config';
 
 const buttonLabels = locale.pages.addRecord.searchForPublication.buttonLabelVariants;

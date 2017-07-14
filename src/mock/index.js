@@ -13,7 +13,7 @@ import {
     externalTitleSearchResultsList,
     internalTitleSearchResultsList
 } from './data/publicationSearch';
-
+import { publicationTypeList } from './data/publicationTypes';
 
 const queryString = require('query-string');
 const mock = new MockAdapter(api, { delayResponse: 2000 });
@@ -53,3 +53,5 @@ mock.onGet(/search\/external\?source=wos&rek_display_type=[0-9]*/).reply(200, ex
 // Mock the publication form internal title search endpoint
 mock.onGet(/search\/internal\?source=wos&rek_display_type=[0-9]*/).reply(200, internalTitleSearchResultsList);
 
+// Mock the publication types endpoint
+mock.onGet('records/types').reply(200, publicationTypeList);

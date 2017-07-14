@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import { Field} from 'redux-form/immutable';
-import { validate } from '../providers/validator';
+import { validate } from '../helpers/validator';
 import { reduxForm } from 'redux-form/immutable';
 import { HelpIcon, TextField } from 'uqlibrary-react-toolbox';
 import PropTypes from 'prop-types';
