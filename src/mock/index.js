@@ -15,7 +15,7 @@ import {documentAccessTypes} from './data/documentAccessTypes';
 import {authorsList} from './data/authors';
 
 const queryString = require('query-string');
-const mock = new MockAdapter(api, { delayResponse: 2000 });
+let mock = new MockAdapter(api, { delayResponse: 2000 });
 
 // set session cookie in mock mode
 Cookies.set(SESSION_COOKIE_NAME, 'abc123');
@@ -34,20 +34,55 @@ if (queryString.parse(location.search).user === 'null') {
 }
 
 // Mock the publication form external doi search endpoint
-mock.onGet(/search\/external\?doi=*/).reply(200, externalDoiSearchResultList);
+// mock.onGet(/search\/external\?doi=*/).reply(200, externalDoiSearchResultList);
+mock.onGet(/search\/external\?doi=*/).reply(
+    () => {
+        return new Promise((resolve) => {
+            setTimeout(() => (resolve([200, externalDoiSearchResultList])), 1000);
+        });
+    }
+);
 
 // Mock the publication form internal doi search endpoint
 mock.onGet(/search\/internal\?doi=*/).reply(200, internalDoiSearchResultList);
 
 // Mock the publication form external pubMed search endpoint
-mock.onGet(/search\/external\?pub_med_id=*/).reply(200, externalPubMedSearchResultsList);
+// mock.onGet(/search\/external\?pub_med_id=*/).reply(200, externalPubMedSearchResultsList);
+mock.onGet(/search\/external\?pub_med_id=*/).reply(
+    () => {
+        return new Promise((resolve) => {
+            setTimeout(resolve([200, externalPubMedSearchResultsList]), 4000);
+        });
+    }
+);
 
 // Mock the publication form internal pubMed search endpoint
 mock.onGet(/search\/internal\?pub_med_id=*/).reply(200, internalPubMedSearchResultsList);
 
 // Mock the publication form external title search endpoint
-mock.onGet(/search\/external\?rek_display_type=[0-9]*/).reply(200, externalTitleSearchResultsList);
+// mock.onGet(/search\/external\?rek_display_type=[0-9]*/).reply(200, externalTitleSearchResultsList);
 // mock.onGet(/search\/external\?source=wos&rek_display_type=[0-9]*/).reply(404);
+mock.onGet(/search\/external\?[a-z0-9_=%&]*source=wos/).reply(
+    () => {
+        return new Promise((resolve) => {
+            setTimeout(() => (resolve([200, externalTitleSearchResultsList.slice(0, 3)])), 3000);
+        });
+    }
+);
+mock.onGet(/search\/external\?[a-z0-9_=%&]*source=scopus/).reply(
+    () => {
+        return new Promise((resolve) => {
+            setTimeout(() => (resolve([200, externalTitleSearchResultsList.slice(2, 4)])), 5000);
+        });
+    }
+);
+mock.onGet(/search\/external\?[a-z0-9_=%&]*source=crossref/).reply(
+    () => {
+        return new Promise((resolve) => {
+            setTimeout(() => (resolve([200, externalTitleSearchResultsList.slice(1, 4)])), 10000);
+        });
+    }
+);
 
 // Mock the publication form internal title search endpoint
 // mock.onGet(/search\/internal\?source=wos&rek_display_type=[0-9]*/).reply(200, internalTitleSearchResultsList);
