@@ -13,10 +13,9 @@ const STEP_3 = 2;
 // forms & custom components
 import {PublicationSearchForm} from 'modules/Forms';
 import {SearchResults} from 'modules/SearchResults';
-import {NoMatchingRecords} from 'modules/NoMatchingRecords';
 import {PublicationTypeForm} from 'modules/Forms/PublicationType';
 import {AddJournalArticleForm} from 'modules/Forms/JournalArticle';
-import {InlineLoader} from 'uqlibrary-react-toolbox';
+
 import {locale} from 'config';
 import {isDOIValue, isPartialDOIValue, isPubMedValue} from 'modules/Forms/PublicationSearch/validator';
 
@@ -30,11 +29,12 @@ export default class AddRecord extends React.Component {
         loadPublicationTypesList: PropTypes.func,
         publicationTypeList: PropTypes.object,
         resetStepper: PropTypes.func,
-        searchResultsList: PropTypes.object,
+        searchResultsList: PropTypes.array,
         loadingSearch: PropTypes.bool,
         selectedPublicationType: PropTypes.object,
         stepperIndex: PropTypes.number,
-        clearPublicationResults: PropTypes.func
+        clearPublicationResults: PropTypes.func,
+        abandonSearch: PropTypes.func
     };
 
     static defaultProps = {
@@ -119,59 +119,40 @@ export default class AddRecord extends React.Component {
             case STEP_2:
                 // on initial load this will be null
                 const searchResultsInformation = locale.pages.addRecord.searchResults;
-                const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
 
                 return (
                     <div>
-                        {this.props.loadingSearch &&
-                            <div className="is-centered">
-                                <InlineLoader message="Searching for your publications..." />
-                            </div>
-                        }
-
-                        {!this.props.loadingSearch && this.props.searchResultsList.size > 0 &&
                         <SearchResults
-                            dataSource={this.props.searchResultsList}
                             title={searchResultsInformation.title}
                             explanationText={searchResultsInformation.explanationText}
                             claimRecordBtnLabel={searchResultsInformation.claimRecordBtnLabel}
                             help={searchResultsInformation.help}
                         />
-                        }
 
-                        {!this.props.loadingSearch && this.props.searchResultsList.size === 0 &&
-                            <NoMatchingRecords
-                                title={noMatchingRecordsInformation.title}
-                                explanationText={noMatchingRecordsInformation.explanationText}
-                                searchAgainBtnLabel={noMatchingRecordsInformation.searchAgainBtnLabel}
-                                addPublicationBtnLabel={noMatchingRecordsInformation.addPublicationBtnLabel}
-                                help={noMatchingRecordsInformation.help}
-                            />
-                        }
-
-                        {!this.props.loadingSearch &&
+                        {
+                            !this.props.loadingSearch &&
                             <div className="layout-card">
-                                    <div className="columns">
-                                        <div className="column is-hidden-mobile"/>
-                                        <div className="column is-narrow-desktop">
+                                <div className="columns">
+                                    <div className="column is-hidden-mobile"/>
+                                    <div className="column is-narrow-desktop">
                                         <RaisedButton
                                             fullWidth
                                             label={buttonLabels.abandon}
-                                            onTouchTap={this.handlePrev}
+                                            onTouchTap={this.props.abandonSearch}
                                         />
-                                        </div>
-                                        <div className="column is-narrow-desktop">
+                                    </div>
+                                    <div className="column is-narrow-desktop">
                                         <RaisedButton
                                             label="Create a new espace record"
                                             secondary
                                             fullWidth
-                                            autoFocus={this.props.searchResultsList.size === 0}
-                                            keyboardFocused={this.props.searchResultsList.size === 0}
+                                            autoFocus={this.props.searchResultsList.length === 0}
+                                            keyboardFocused={this.props.searchResultsList.length === 0}
                                             onTouchTap={this.handleNext}
                                         />
-                                        </div>
                                     </div>
                                 </div>
+                            </div>
                         }
 
                         <ReactTooltip id="claimTooltips" effect="solid" place="bottom"/>
