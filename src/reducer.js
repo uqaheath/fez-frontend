@@ -10,6 +10,7 @@ import {claimPublicationsReducer} from 'modules/ClaimPublication';
 
 import {publicationTypeReducer, publicationSearchReducer, journalArticleReducer} from './modules/Forms';
 import {authorsReducer, fileUploadReducer, authorLinkingReducer} from './modules/SharedComponents';
+import searchResultReducer from './modules/SearchResults/reducer';
 
 const rootReducer = combineReducers({
     form: formReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     helpDrawer: helpDrawerReducer,
     publicationTypes: publicationTypeReducer,
     journalArticle: journalArticleReducer,
-    publicationSearch: publicationSearchReducer
+    publicationSearch: publicationSearchReducer,
+    searchResult: searchResultReducer
 });
 
 export default rootReducer;
