@@ -3,7 +3,9 @@ import {api} from 'config';
 const SOURCE_WOS = 'wos';
 const SOURCE_CROSSREF = 'crossref';
 const SOURCE_SCOPUS = 'scopus';
-// const SOURCE_PUBMED = 'pubmed';
+const SOURCE_PUBMED = 'pubmed';
+
+const externalUrl = querystring => (encodeURI(`search/external?${querystring}`));
 
 function processError(error, resolve, reject) {
     if (error.hasOwnProperty('response') && error.response !== null && typeof(error.response) !== 'undefined'
@@ -15,6 +17,12 @@ function processError(error, resolve, reject) {
     }
 }
 
+/**
+ * Get promise for a given url
+ *
+ * @param url
+ * @returns {Promise}
+ */
 function getPromise(url) {
     return new Promise((resolve, reject) => {
         api.get(url)
@@ -24,60 +32,56 @@ function getPromise(url) {
 }
 
 /**
- * Generic search function that searches externally
+ * Perform WOS search
+ *
+ * @param querystring
  * @returns {Promise}
  */
-function performExternalSearch(querystring) {
-    const url = encodeURI(`search/external?${querystring}`);
-    return  Promise.all([
-        getPromise(`${url}&source=${SOURCE_WOS}`),
-        getPromise(`${url}&source=${SOURCE_SCOPUS}`),
-        // getPromise(`${url}&source=${SOURCE_PUBMED}`),
-        getPromise(`${url}&source=${SOURCE_CROSSREF}`)
-    ]);
+export function performExternalWosSearch(querystring) {
+    const url = externalUrl(querystring);
+    return getPromise(`${url}&source=${SOURCE_WOS}`);
 }
 
 /**
- * Generic search function that searches internally first and if it fails, does an external search
+ * Perform SCOPUS search
+ *
+ * @param querystring
  * @returns {Promise}
  */
-function performSearch(querystring) {
-    return new Promise((resolve) => {
-        api.get(`search/internal?${querystring}`).then(response => {
-            if (response.data.length > 0) {
-                resolve(response.data);
-            } else {
-                resolve(performExternalSearch(querystring));
-            }
-        }).catch(() => {
-            // if it errors, try an external search
-            resolve(performExternalSearch(querystring));
-        });
-    });
+export function performExternalScopusSearch(querystring) {
+    const url = externalUrl(querystring);
+    return getPromise(`${url}&source=${SOURCE_SCOPUS}`);
 }
 
 /**
- * Searches internally and externally for a requested doi
+ * Perform CROSSREF search
+ *
+ * @param querystring
  * @returns {Promise}
  */
-export function searchDoiEndpoint(doi) {
-    return performSearch(`doi=${doi}`);
+export function performExternalCrossrefSearch(querystring) {
+    const url = externalUrl(querystring);
+    return getPromise(`${url}&source=${SOURCE_CROSSREF}`);
 }
 
 /**
- * Searches internally and externally for a requested pubmedId
+ * Perform PUBMED search
+ *
+ * @param querystring
  * @returns {Promise}
  */
-export function searchPubmedEndpoint(pubMedId) {
-    return performSearch(`pub_med_id=${pubMedId}`);
+export function performExternalPubmedSearch(querystring) {
+    const url = externalUrl(querystring);
+    return getPromise(`${url}&source=${SOURCE_PUBMED}`);
 }
 
-
 /**
- * Searches internally and externally for a requested title
+ * Perform INTERNAL (eSpace) search
+ *
+ * @param querystring
  * @returns {Promise}
  */
-export function searchTitleEndpoint(rekDisplayType, title) {
-    // TODO: update source API endpoint, needs to all all external sources
-    return performSearch(`rek_display_type=${rekDisplayType}&title=${title}`);
+export function performInternalSearch(querystring) {
+    const url = `search/internal?${querystring}`;
+    return getPromise(url);
 }
