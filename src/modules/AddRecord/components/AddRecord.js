@@ -4,7 +4,6 @@ import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
-import {StandardCard} from 'uqlibrary-react-toolbox';
 
 // the stepper's step constants
 const STEP_1 = 0;
@@ -133,7 +132,6 @@ export default class AddRecord extends React.Component {
             case STEP_2:
                 // on initial load this will be null
                 const searchResultsInformation = locale.pages.addRecord.searchResults;
-                const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
 
                 return (
                     <div>
@@ -143,10 +141,6 @@ export default class AddRecord extends React.Component {
                             claimRecordBtnLabel={ searchResultsInformation.claimRecordBtnLabel }
                             help={ searchResultsInformation.help }
                         />
-
-                        {!this.props.loadingSearch && this.props.searchResultsList.size === 0 &&
-                            <StandardCard {...noMatchingRecordsInformation} />
-                        }
 
                         {
                             !this.props.loadingSearch &&

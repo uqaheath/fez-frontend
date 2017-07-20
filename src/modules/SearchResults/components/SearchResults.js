@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form/immutable';
 
 import { StandardCard, InlineLoader } from 'uqlibrary-react-toolbox';
 import SearchResultsRow from './SearchResultsRow';
-// import { locale } from '../../../config';
+import { locale } from '../../../config';
 
 class SearchResults extends Component {
 
@@ -67,7 +67,7 @@ class SearchResults extends Component {
             );
         });
 
-        // const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
+        const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
 
         return (
             <StandardCard title={title} help={help}>
@@ -84,17 +84,16 @@ class SearchResults extends Component {
                 {searchResultEntries}
 
                 {
-                    /*
+                    this.props.loadingMoreSearch &&
+                    <div className="is-centered">
+                        <InlineLoader message="Searching more publications..." />
+                    </div>
+                }
+
+                {
                     !this.props.loadingSearch &&
                     this.props.searchResultsList.length === 0 &&
-                    <NoMatchingRecords
-                        title={noMatchingRecordsInformation.title}
-                        explanationText={noMatchingRecordsInformation.explanationText}
-                        searchAgainBtnLabel={noMatchingRecordsInformation.searchAgainBtnLabel}
-                        addPublicationBtnLabel={noMatchingRecordsInformation.addPublicationBtnLabel}
-                        help={noMatchingRecordsInformation.help}
-                    />
-                    */
+                    <StandardCard {...noMatchingRecordsInformation} />
                 }
             </StandardCard>
         );
