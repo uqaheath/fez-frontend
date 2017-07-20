@@ -1,5 +1,31 @@
 /**
- * Created by uqvasai on 17/07/2017.
+ * Search namespaces
+ */
+export const SEARCH_RESULT_ADD_RECORD = 'SEARCH_RESULT_ADD_RECORD';
+export const SEARCH_RESULT_CLAIM_PUBLICATION = 'SEARCH_RESULT_CLAIM_PUBLICATION';
+
+/**
+ * Search sources
+ */
+export const SOURCE_WOS = 'wos';
+export const SOURCE_CROSSREF = 'crossref';
+export const SOURCE_SCOPUS = 'scopus';
+export const SOURCE_PUBMED = 'pubmed';
+
+/**
+ * List of valid external sources
+ *
+ * @type {[*]}
+ */
+export const validExternalSources = [
+    SOURCE_CROSSREF,
+    SOURCE_PUBMED,
+    SOURCE_SCOPUS,
+    SOURCE_WOS
+];
+
+/**
+ * Search action types
  */
 export const SEARCH_INITIATED = 'SEARCH_INITIATED';
 
@@ -25,3 +51,4 @@ export const PUBMED_SEARCH_FAILED = 'PUBMED_SEARCH_FAILED';
 export const INTERNAL_SEARCH_FAILED = 'INTERNAL_SEARCH_FAILED';
 
 export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
+
