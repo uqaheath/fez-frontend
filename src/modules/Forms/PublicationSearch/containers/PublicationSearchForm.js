@@ -4,7 +4,7 @@ import {reduxForm, getFormValues} from 'redux-form/immutable';
 import PublicationSearchForm from '../components/PublicationSearchForm';
 import {validate} from '../validator';
 import Immutable from 'immutable';
-import { setPublicationSearchText } from '../../../SearchResults/actions';
+import { setPublicationSearchText } from '../actions';
 
 
 let PublicationSearchFormContainer = reduxForm({

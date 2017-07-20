@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutable';
-import { SEARCH_INITIATED } from '../../SearchResults/constants';
+import { SEARCH_INITIATED } from '../../../constants/search';
 import { convertToQueryString } from '../../../helpers/search';
 
 function publicationSearchText(state = '', action) {
