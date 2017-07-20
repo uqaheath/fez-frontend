@@ -7,7 +7,7 @@ import {loadUsersPublications} from 'modules/ClaimPublication/actions';
 let DashboardPage = connect(state => {
     return {
         account: state.getIn(['app', 'account']),
-        claimPublicationResults: state.get('claimPublication').get('claimPublicationResults')
+        claimPublicationResults: state.get('claimPublication').get('searchResultsList')
     };
 }, dispatch => {
     return {

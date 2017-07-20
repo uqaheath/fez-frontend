@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
         account: PropTypes.object.isRequired,
         history: PropTypes.object,
         loadUsersPublications: PropTypes.func,
-        claimPublicationResults: PropTypes.object
+        claimPublicationResults: PropTypes.array
     };
 
     constructor(props) {
@@ -67,10 +67,10 @@ class Dashboard extends React.Component {
                                 transitionEnterTimeout={100}
                                 transitionLeaveTimeout={300}
                             >
-                                {this.props.claimPublicationResults.size > 0 && this.state.showAppbar  && (
+                                {this.props.claimPublicationResults.length > 0 && this.state.showAppbar  && (
                                     <AppBar
                                         className="claim-publication-lure"
-                                        title={`We have found ${this.props.claimPublicationResults.size} articles that could possibly be your work.`}
+                                        title={`We have found ${this.props.claimPublicationResults.length} articles that could possibly be your work.`}
                                         iconElementLeft={<FontIcon className="material-icons error_outline">error_outline</FontIcon>}
                                         iconElementRight={<span className="button-wrap">
                                     <FlatButton label="Claim your publications now" onTouchTap={this.claimYourPublications} className="claim-publications" />
