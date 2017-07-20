@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { reduxForm } from 'redux-form/immutable';
+
 import { locale } from '../../../config';
 
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import { HelpIcon, InlineLoader } from 'uqlibrary-react-toolbox';
-import SearchResultsRow from '../containers/SearchResultsRow';
+import SearchResultsRow from './SearchResultsRow';
 import { NoMatchingRecords } from '../../NoMatchingRecords';
 
-export default class SearchResults extends Component {
+class SearchResults extends Component {
 
     static propTypes = {
         title: PropTypes.string.isRequired,
         explanationText: PropTypes.string.isRequired,
         claimRecordBtnLabel: PropTypes.string,
-        dataSource: PropTypes.array,
+        searchResultsList: PropTypes.array,
         help: PropTypes.object,
         performSearch: PropTypes.func,
-        searchText: PropTypes.string,
         loadingSearch: PropTypes.bool,
         loadingMoreSearch: PropTypes.bool
     };
@@ -29,31 +30,31 @@ export default class SearchResults extends Component {
         /**
          * Make an API call to load search result
          */
-        this.props.performSearch(this.props.searchText);
+        this.props.performSearch();
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            dataSource: nextProps.dataSource
+            searchResultsList: nextProps.searchResultsList
         });
     }
 
     componentWillUnmount() {
         this.setState({
-            dataSource: []
+            searchResultsList: []
         });
     }
 
     render() {
-        const { dataSource, help, title} = this.props;
-        const searchResultEntries = dataSource.map((source, index) => {
+        const { searchResultsList, help, title} = this.props;
+        const searchResultEntries = searchResultsList.map((source, index) => {
             const entry = {
                 index,
                 id: source.rek_pid,
                 title: source.rek_title,
                 journalName: source.fez_record_search_key_journal_name ? source.fez_record_search_key_journal_name.rek_journal_name : null,
                 authors: source.fez_record_search_key_author,
-                publisher: source.fez_record_search_key_publisher.rek_publisher,
+                publisher: source.fez_record_search_key_publisher ? source.fez_record_search_key_publisher.rek_publisher : null,
                 volumeNumber: source.fez_record_search_key_volume_number ? source.fez_record_search_key_volume_number.rek_volume_number : null,
                 issueNumber: source.fez_record_search_key_issue_number ? source.fez_record_search_key_issue_number.rek_issue_number : null,
                 startPage: source.fez_record_search_key_start_page ? source.fez_record_search_key_start_page.rek_start_page : null,
@@ -101,7 +102,7 @@ export default class SearchResults extends Component {
                         </CardHeader>
                         <CardText className="body-1">
                             <div>
-                                {this.props.explanationText.replace('[noOfResults]', this.props.dataSource.length)}
+                                {this.props.explanationText.replace('[noOfResults]', this.props.searchResultsList.length)}
                             </div>
                             { searchResultEntries }
                         </CardText>
@@ -116,7 +117,7 @@ export default class SearchResults extends Component {
 
                 {
                     !this.props.loadingSearch &&
-                    this.props.dataSource.size === 0 &&
+                    this.props.searchResultsList.size === 0 &&
                     <NoMatchingRecords
                         title={noMatchingRecordsInformation.title}
                         explanationText={noMatchingRecordsInformation.explanationText}
@@ -130,3 +131,7 @@ export default class SearchResults extends Component {
         );
     }
 }
+
+export default reduxForm({
+    form: 'SearchResultsForm'
+})(SearchResults);

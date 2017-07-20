@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
 import FlatButton from 'material-ui/FlatButton';
@@ -12,7 +13,7 @@ const altmetricIcon = require('images/altmetric_icon.svg');
 import {locale} from 'config';
 import './SearchResultsRow.scss';
 
-export default class SearchResultsRow extends Component {
+class SearchResultsRow extends Component {
 
     static propTypes = {
         entry: PropTypes.object.isRequired,
@@ -119,3 +120,5 @@ export default class SearchResultsRow extends Component {
         );
     }
 }
+
+export default withRouter(SearchResultsRow);
