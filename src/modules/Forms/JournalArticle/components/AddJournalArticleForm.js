@@ -5,7 +5,7 @@ import {Field, FormSection} from 'redux-form/immutable';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import {HelpIcon, TextField} from 'uqlibrary-react-toolbox';
-import {AddAuthors, FileUploader, SelectField, SubmissionErrorMessage} from 'modules/SharedComponents';
+import {ContributorsEditorField, FileUploader, SelectField, SubmissionErrorMessage} from 'modules/SharedComponents';
 import {validation, locale} from 'config';
 
 import {loadPublicationSubTypesList} from '../actions';
@@ -13,7 +13,6 @@ import {saveRecord, resetRecord} from 'actions';
 import {resetStepper} from '../../../AddRecord/actions';
 import {uploadFile} from '../../../SharedComponents/FileUploader/actions';
 import {showDialogBox} from 'modules/App';
-
 
 import './AddJournalArticleForm.scss';
 
@@ -23,8 +22,8 @@ export default class AddJournalArticleForm extends Component {
         form: PropTypes.string.isRequired,
         formValues: PropTypes.object,
         handleSubmit: PropTypes.func,
+        change: PropTypes.func,
         acceptedFiles: PropTypes.object,
-        authorsList: PropTypes.object,
         hasOpenAccess: PropTypes.bool,
         isOpenAccessAccepted: PropTypes.bool,
         isUploadCompleted: PropTypes.bool,
@@ -66,21 +65,7 @@ export default class AddJournalArticleForm extends Component {
     };
 
     setAuthorData = () => {
-        const {authorsList} = this.props;
 
-        if (authorsList.size > 0) {
-            const data = {'fez_record_search_key_author': []};
-            authorsList.toJS().map((author, index) => {
-                data.fez_record_search_key_author.push({
-                    'rek_author': author.name,
-                    'rek_author_order': (index + 1)
-                });
-            });
-
-            return data;
-        }
-
-        return {};
     };
 
     setFileData = () => {
@@ -135,8 +120,14 @@ export default class AddJournalArticleForm extends Component {
         }
 
         const fileData = this.setFileData();
-        const authorData = this.setAuthorData();
-        const combinedData = Object.assign({}, defaultData, formData, fileData, authorData);
+        const authorData = formData.authors.map((author, index) => {
+            return {
+                'rek_author': author.nameAsPublished,
+                'rek_author_order': (index + 1)
+            };
+        });
+
+        const combinedData = Object.assign({}, defaultData, formData, fileData, {'fez_record_search_key_author': authorData});
         this.props.dispatch(saveRecord(combinedData));
     };
 
@@ -296,8 +287,11 @@ export default class AddJournalArticleForm extends Component {
                             </div>
                         </div>
                     </CardHeader>
+
                     <CardText className="body-1">
-                        <AddAuthors/>
+                        <Field component={ContributorsEditorField}
+                               name="authors"
+                        />
                     </CardText>
                 </Card>
 
