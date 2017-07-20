@@ -20,6 +20,7 @@ class ContributorForm extends Component {
     static defaultProps = {
         locale: {
             nameAsPublishedLabel: 'Name as published',
+            nameAsPublishedHint: 'Please type the name exactly as published',
             identifierLabel: 'UQ identifier (if available)',
             addButton: 'Add'
         }
@@ -44,13 +45,18 @@ class ContributorForm extends Component {
     }
 
     componentWillUnmount() {
+        const div = document.querySelector('div.layout-fill.align-stretch');
+        div.removeEventListener('scroll', this.handleParentContainerScroll.bind(this));
     }
 
     handleParentContainerScroll() {
         if (this.refs.identifierField) this.refs.identifierField.close();
     }
 
-    _addContributor = () => {
+    _addContributor = (event) => {
+        // add contributor if user hits 'enter' key on input field
+        if(event.key && (event.key !== 'Enter' || this.state.nameAsPublished.length === 0)) return;
+
         // pass on the selected contributor
         this.props.onAdd({...this.state.contributor, ...{nameAsPublished: this.state.nameAsPublished}});
 
@@ -96,19 +102,20 @@ class ContributorForm extends Component {
         const autoCompleteDataFormat = {text: 'displayName', value: 'aut_id'};
 
         return (
-            <div className="columns">
-                <div className="column">
+            <div className="columns contributors dataList">
+                <div className="column contributorsEntry">
                     <TextField
                         fullWidth
                         ref="nameAsPublishedField"
                         floatingLabelText={this.props.locale.nameAsPublishedLabel}
-                        hintText={this.props.locale.nameAsPublishedLabel}
+                        hintText={this.props.locale.nameAsPublishedHint}
                         value={this.state.nameAsPublished}
                         onChange={this._onNameChanged}
+                        onKeyPress={this._addContributor}
                     />
                 </div>
                 {this.props.showIdentifierLookup &&
-                <div className="column is-5-desktop is-5-tablet is-12-mobile">
+                <div className="column contributorsLinking">
                     <AutoComplete
                         disabled={this.state.nameAsPublished.trim().length === 0}
                         listStyle={{maxHeight: 200, overflow: 'auto'}}
@@ -126,8 +133,9 @@ class ContributorForm extends Component {
                         onNewRequest={this._onUQIdentifierSelected}
                     />
                 </div>}
-                <div className="column is-1-desktop is-1-tablet is-12-mobile is-centered">
+                <div className="column is-narrow contributorsButton">
                     <RaisedButton
+                        className="addContributorAddButton"
                         primary
                         label={this.props.locale.addButton}
                         disabled={this.state.nameAsPublished.trim().length === 0}

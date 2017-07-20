@@ -1,44 +1,28 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {Card, CardText, CardHeader} from 'material-ui/Card';
-import {HelpIcon} from 'uqlibrary-react-toolbox';
+import {StandardPage, StandardCard} from 'uqlibrary-react-toolbox';
+import {PublicationForm} from '../PublicationForm';
 
 export default function Browse({title, text, help}) {
     return (
-        <div className="layout-fill">
-            <h1 className="page-title headline">{title ? title : 'Browse'}</h1>
-            <Card className="layout-card">
-                <CardHeader className="card-header">
-                    <div className="columns is-gapless is-mobile">
-                        <div className="column">
-                            <h2 className="title">{title ? title : 'Browse'}</h2>
-                        </div>
-                        <div className="column is-narrow is-helpicon">
-                            {help && (
-                                <HelpIcon
-                                    title={help.title}
-                                    text={help.text}
-                                    buttonLabel={help.button}
-                                    />
-                            )}
-                        </div>
-                    </div>
-                </CardHeader>
+        <StandardPage title={title}>
+            <StandardCard title={title} help={help}>
+                {text}
+            </StandardCard>
 
-                <CardText className="body-1">
-                    <div>
-                        {text ? text : 'Browse this repository'}
-                    </div>
-                </CardText>
+            <PublicationForm onFormSubmitSuccess={()=>{ console.log('success!');}} onFormCancel={()=>{ console.log('good bye!');}} />
 
-            </Card>
-        </div>
+        </StandardPage>
     );
 }
 
 Browse.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
-    help: PropTypes.object
+    help: PropTypes.shape({
+        title: PropTypes.string,
+        text: PropTypes.any,
+        buttonLabel: PropTypes.string
+    })
 };
 

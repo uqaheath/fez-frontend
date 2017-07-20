@@ -5,11 +5,9 @@ import Immutable from 'immutable';
 
 // forms & custom components
 import ClaimPublicationSearchResults from '../containers/ClaimPublicationSearchResults';
-import {NoMatchingRecords} from 'modules/NoMatchingRecords';
+import {StandardCard} from 'uqlibrary-react-toolbox';
 import {locale} from 'config';
 import {showDialogBox} from 'modules/App';
-
-import './ClaimPublication.scss';
 
 export default class ClaimPublication extends React.Component {
 
@@ -72,9 +70,7 @@ export default class ClaimPublication extends React.Component {
         const claimPublicationsInformation = locale.pages.claimPublications;
         const resultsInformation = claimPublicationsInformation.claimPublicationResults;
         const noRecordsInformation = resultsInformation.noMatchingPublications;
-        const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
         const {
-            account,
             claimPublicationResults,
             loadingSearch
         } = this.props;
@@ -85,7 +81,7 @@ export default class ClaimPublication extends React.Component {
         const resultsCountText = `${resultSet.length} out of ${noOfResults} potential match(es) displayed. Select any item to claim it as your work.`;
         return (
             <div className="layout-fill">
-                <h1 className="page-title display-1">{claimPublicationsInformation.title}</h1>
+                <h1 className="title is-3">{claimPublicationsInformation.title}</h1>
 
                 <ClaimPublicationSearchResults
                     title={resultsInformation.title}
@@ -111,11 +107,7 @@ export default class ClaimPublication extends React.Component {
                 }
 
                 {!loadingSearch && noOfResults === 0 &&
-                    <NoMatchingRecords
-                        title={noRecordsInformation.title}
-                        explanationText={noRecordsInformation.explanationText.replace('[username]', account.get('id'))}
-                        help={noMatchingRecordsInformation.help}
-                    />
+                    <StandardCard {...noRecordsInformation} />
                 }
             </div>
         );

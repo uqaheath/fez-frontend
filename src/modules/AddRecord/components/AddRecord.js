@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
+import {StandardCard} from 'uqlibrary-react-toolbox';
 
 // the stepper's step constants
 const STEP_1 = 0;
@@ -12,14 +13,13 @@ const STEP_3 = 2;
 
 // forms & custom components
 import {PublicationSearchForm} from 'modules/Forms';
-import {PublicationTypeForm} from 'modules/Forms/PublicationType';
-import {AddJournalArticleForm} from 'modules/Forms/JournalArticle';
 import AddRecordPublicationSearchResults from '../containers/AddRecordPublicationSearchResults';
 
+// import {SearchResults} from 'modules/SearchResults';
+// import {PublicationTypeForm} from 'modules/Forms/PublicationType';
+import {PublicationForm} from 'modules/PublicationForm';
 import {locale} from 'config';
 import {isDOIValue, isPartialDOIValue, isPubMedValue} from 'modules/Forms/PublicationSearch/validator';
-
-import './AddRecord.scss';
 
 export default class AddRecord extends React.Component {
 
@@ -67,6 +67,20 @@ export default class AddRecord extends React.Component {
     }
 
     cancelAddingRecord = () => {
+        this.props.resetStepper();
+    };
+
+    _recordSaved = () => {
+        // TODO: record has been saved... what to do?
+        console.log('display a dialog box with options...');
+        this.props.resetStepper();
+    };
+
+    _cancelWorkflow = () => {
+        this.props.resetStepper();
+    };
+
+    _re = () => {
         this.props.resetStepper();
     };
 
@@ -119,6 +133,7 @@ export default class AddRecord extends React.Component {
             case STEP_2:
                 // on initial load this will be null
                 const searchResultsInformation = locale.pages.addRecord.searchResults;
+                const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
 
                 return (
                     <div>
@@ -128,6 +143,10 @@ export default class AddRecord extends React.Component {
                             claimRecordBtnLabel={ searchResultsInformation.claimRecordBtnLabel }
                             help={ searchResultsInformation.help }
                         />
+
+                        {!this.props.loadingSearch && this.props.searchResultsList.size === 0 &&
+                            <StandardCard {...noMatchingRecordsInformation} />
+                        }
 
                         {
                             !this.props.loadingSearch &&
@@ -159,35 +178,8 @@ export default class AddRecord extends React.Component {
                     </div>
                 );
             case STEP_3:
-                const {selectedPublicationType} = this.props;
-                const publicationTypeInformation = locale.pages.addRecord.publicationTypeForm;
-                const showButton = !selectedPublicationType || (selectedPublicationType && selectedPublicationType.size === 0);
-
                 return (
-                    <div>
-                        <PublicationTypeForm
-                            title={publicationTypeInformation.title}
-                            explanationText={publicationTypeInformation.explanationText}
-                            help={publicationTypeInformation.help}
-                            maxSearchResults={publicationTypeInformation.maxSearchResults}
-                            publicationTypeLabel={publicationTypeInformation.publicationTypeLabel}
-                            dataSource={this.props.publicationTypeList}
-                            popularTypesList={publicationTypeInformation.popularTypesList} />
-
-                            {showButton &&
-                                <div style={{maxWidth: '1200px', margin: '24px auto', width: '90%', textAlign: 'right'}}>
-                                    <RaisedButton
-                                        label={buttonLabels.abandon}
-                                        onTouchTap={this.props.abandonSearch}/>
-                                </div>
-                            }
-
-                            {/* TODO: fix this warning */}
-                            {selectedPublicationType.size > 0
-                                && selectedPublicationType.get('name').toLowerCase() === publicationTypeInformation.documentTypes.JOURNAL_ARTICLE
-                                && <AddJournalArticleForm form="AddJournalArticleForm" suggestedFormTitle={this.state.doiSearchValue} />
-                            }
-                    </div>
+                    <PublicationForm onFormSubmitSuccess={this._recordSaved} onFormCancel={this._cancelWorkflow} />
                 );
             default:
                 const stepperInformation = locale.pages.addRecord.stepper;
@@ -210,7 +202,7 @@ export default class AddRecord extends React.Component {
         const stepperInformation = locale.pages.addRecord.stepper;
         return (
             <div>
-                <h1 className="page-title headline">{locale.pages.addRecord.title}</h1>
+                <h1 className="title is-3">{locale.pages.addRecord.title}</h1>
 
                 {/* Stepper start */}
                 <div className="Stepper">

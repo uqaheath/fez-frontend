@@ -1,5 +1,5 @@
 // repositories
-import {loadUsersPublicationData, markPublicationsDataNotMine, claimPublicationRecord}  from 'repositories/claimPublication';
+import {getPossibleUnclaimedPublications, postHidePossiblePublications, postClaimPossiblePublication}  from 'repositories/publications';
 
 import { SEARCH_LOADING, SEARCH_COMPLETED, CLEAR_SEARCH_RESULTS, SEARCH_RESULT_CLAIM_PUBLICATION } from '../../constants/search';
 
@@ -25,7 +25,7 @@ export function claimPublication(data) {
     return dispatch => {
         console.log('actions/records - claiming....');
         dispatch({type: CLAIM_SUBMITTING});
-        claimPublicationRecord(data).then((data) => {
+        postClaimPossiblePublication(data).then((data) => {
             dispatch({
                 type: CLAIM_SUBMITTED,
                 payload: data
@@ -48,7 +48,7 @@ export function loadUsersPublications(username) {
     return dispatch => {
         dispatch({ type: CLEAR_SEARCH_RESULTS, name: SEARCH_RESULT_CLAIM_PUBLICATION });
         dispatch({type: SEARCH_LOADING});
-        loadUsersPublicationData(username).then(data => {
+        getPossibleUnclaimedPublications(username).then(data => {
             dispatch({
                 type: SEARCH_COMPLETED,
                 payload: data,
@@ -72,7 +72,7 @@ export function loadUsersPublications(username) {
 export function markPublicationsNotMine(username, pids) {
     return dispatch => {
         dispatch({type: USERS_PUBLICATIONS_LOADING});
-        markPublicationsDataNotMine(username, pids).then(data => {
+        postHidePossiblePublications({username, pids}).then(data => {
             dispatch({
                 type: USERS_PUBLICATIONS_LOADED,
                 payload: data

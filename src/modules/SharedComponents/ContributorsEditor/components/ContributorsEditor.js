@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ContributorRowHeader from './ContributorRowHeader';
 import ContributorRow from './ContributorRow';
 import ContributorForm from './ContributorForm';
-import AlertMessage from '../../AlertMessage';
+import {Alert} from 'uqlibrary-react-toolbox';
 
 export default class ContributorsEditor extends Component {
 
@@ -94,6 +94,7 @@ export default class ContributorsEditor extends Component {
                 onMoveDown={this.moveDownContributor}
                 onDelete={this.deleteContributor}
                 showIdentifierLookup={this.props.showIdentifierLookup}
+                contributorSuffix={this.props.locale.contributorSuffix}
             />
         );
 
@@ -104,15 +105,16 @@ export default class ContributorsEditor extends Component {
                     showIdentifierLookup={this.props.showIdentifierLookup}
                 />
                 {this.state.errorMessage &&
-                    <AlertMessage
+                    <Alert
                         title="Error!"
                         message={this.state.errorMessage}
-                        context="warning" />}
+                        type="warning" />}
 
                 {this.state.contributors.length > 0 &&
                     <ContributorRowHeader
                         onDeleteAll={this.deleteAllContributors}
-                        showIdentifierLookup={this.props.showIdentifierLookup} />}
+                        showIdentifierLookup={this.props.showIdentifierLookup}
+                    />}
 
                 {renderContributorsRows}
             </div>

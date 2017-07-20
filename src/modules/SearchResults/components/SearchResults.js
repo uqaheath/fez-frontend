@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 
-import { locale } from '../../../config';
-
-import { Card, CardHeader, CardText } from 'material-ui/Card';
-import { HelpIcon, InlineLoader } from 'uqlibrary-react-toolbox';
+import { StandardCard, InlineLoader } from 'uqlibrary-react-toolbox';
 import SearchResultsRow from './SearchResultsRow';
-import { NoMatchingRecords } from '../../NoMatchingRecords';
+// import { locale } from '../../../config';
 
 class SearchResults extends Component {
 
@@ -70,54 +67,26 @@ class SearchResults extends Component {
             );
         });
 
-        const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
+        // const noMatchingRecordsInformation = locale.pages.addRecord.noMatchingRecords;
 
         return (
-            <div>
+            <StandardCard title={title} help={help}>
                 {
                     this.props.loadingSearch &&
                     <div className="is-centered">
                         <InlineLoader message="Searching for your publications..." />
                     </div>
                 }
+                <div>
+                    {this.props.explanationText.replace('[noOfResults]', this.props.searchResultsList.length)}
+                </div>
+
+                {searchResultEntries}
 
                 {
+                    /*
                     !this.props.loadingSearch &&
-                    <Card className="layout-card">
-                        <CardHeader className="card-header">
-                            <div className="columns is-gapless is-mobile">
-                                <div className="column">
-                                    <h2 className="title">{title}</h2>
-                                </div>
-                                <div className="column is-narrow is-helpicon">
-                                    {help && (
-                                        <HelpIcon
-                                            title={help.title}
-                                            text={help.text}
-                                            buttonLabel={help.buttonLabel}
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardText className="body-1">
-                            <div>
-                                {this.props.explanationText.replace('[noOfResults]', this.props.searchResultsList.length)}
-                            </div>
-                            { searchResultEntries }
-                        </CardText>
-                        {
-                            this.props.loadingMoreSearch &&
-                            <div className="is-centered">
-                                <InlineLoader message="Searching more publications..." />
-                            </div>
-                        }
-                    </Card>
-                }
-
-                {
-                    !this.props.loadingSearch &&
-                    this.props.searchResultsList.size === 0 &&
+                    this.props.searchResultsList.length === 0 &&
                     <NoMatchingRecords
                         title={noMatchingRecordsInformation.title}
                         explanationText={noMatchingRecordsInformation.explanationText}
@@ -125,9 +94,9 @@ class SearchResults extends Component {
                         addPublicationBtnLabel={noMatchingRecordsInformation.addPublicationBtnLabel}
                         help={noMatchingRecordsInformation.help}
                     />
+                    */
                 }
-            </div>
-
+            </StandardCard>
         );
     }
 }

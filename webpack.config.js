@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-const port = 3000;
+const port = 3002;
 let url = 'localhost';
 let useMock = false;
 
