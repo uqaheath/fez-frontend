@@ -1,6 +1,7 @@
 // repositories
 import {loadUsersPublicationData, markPublicationsDataNotMine, claimPublicationRecord}  from 'repositories/claimPublication';
 
+import { SEARCH_LOADING, SEARCH_COMPLETED, CLEAR_SEARCH_RESULTS, SEARCH_RESULT_CLAIM_PUBLICATION } from '../../constants/search';
 
 export const PUBLICATION_RESULTS_CLEARED = 'PUBLICATION_RESULTS_CLEARED';
 export const PUBLICATION_SELECTED_CLEARED = 'PUBLICATION_SELECTED_CLEARED';
@@ -45,11 +46,13 @@ export function claimPublication(data) {
  */
 export function loadUsersPublications(username) {
     return dispatch => {
-        dispatch({type: USERS_PUBLICATIONS_LOADING});
+        dispatch({ type: CLEAR_SEARCH_RESULTS, name: SEARCH_RESULT_CLAIM_PUBLICATION });
+        dispatch({type: SEARCH_LOADING});
         loadUsersPublicationData(username).then(data => {
             dispatch({
-                type: USERS_PUBLICATIONS_LOADED,
-                payload: data
+                type: SEARCH_COMPLETED,
+                payload: data,
+                name: SEARCH_RESULT_CLAIM_PUBLICATION
             });
         }).catch(() => {
             // throw(error);
@@ -102,7 +105,7 @@ export function clearSelectedPublication() {
  */
 export function clearPublicationResults() {
     return {
-        type: PUBLICATION_RESULTS_CLEARED,
+        type: CLEAR_SEARCH_RESULTS,
         payload: {}
     };
 }

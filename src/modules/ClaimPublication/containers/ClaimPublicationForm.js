@@ -14,12 +14,12 @@ ClaimPublicationFormContainer = connect((state) => {
     const fileUploadState = state.get('fileUpload');
     return {
         acceptedFiles: fileUploadState.get('acceptedFiles'),
-        claimPublicationResults: claimPublication.get('claimPublicationResults'),
+        claimPublicationResults: claimPublication.get('searchResultsList'),
         formValues: getFormValues('ClaimPublicationForm')(state) || Immutable.Map({}),
         isUploadCompleted: fileUploadState.get('isUploadCompleted'),
         recordClaimState: claimPublication.get('recordClaimState'),
         recordClaimErrorMessage: claimPublication.get('recordClaimErrorMessage'),
-        searchResultsList: state.get('publicationSearch') ? state.get('publicationSearch').get('searchResultsList') : {},
+        searchResultsList: [], // state.get('publicationSearch') ? state.get('publicationSearch').get('searchResultsList') : {},
         selectedPublication: claimPublication.get('selectedPublication'),
         selectedAuthorId: authorLinking.get('selectedAuthor')
     };

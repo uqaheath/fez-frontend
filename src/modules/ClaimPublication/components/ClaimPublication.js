@@ -4,9 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Immutable from 'immutable';
 
 // forms & custom components
-import {SearchResults} from 'modules/SearchResults';
+import ClaimPublicationSearchResults from '../containers/ClaimPublicationSearchResults';
 import {NoMatchingRecords} from 'modules/NoMatchingRecords';
-import {InlineLoader} from 'uqlibrary-react-toolbox';
 import {locale} from 'config';
 import {showDialogBox} from 'modules/App';
 
@@ -16,7 +15,7 @@ export default class ClaimPublication extends React.Component {
 
     static propTypes = {
         account: PropTypes.object,
-        claimPublicationResults: PropTypes.object,
+        claimPublicationResults: PropTypes.array,
         clearSearchResults: PropTypes.func,
         dispatch: PropTypes.func,
         loadingSearch: PropTypes.bool,
@@ -34,18 +33,13 @@ export default class ClaimPublication extends React.Component {
         this.props.clearSearchResults();
     }
 
-    componentDidMount() {
-        const {account, loadUsersPublications} = this.props;
-        loadUsersPublications(account.get('id'));
-    }
-
     extractResultSet = () => {
         const {claimPublicationResults} = this.props;
         const claimPublicationsInformation = locale.pages.claimPublications;
         let resultSet = {};
 
         // limit the number of results
-        if (claimPublicationResults.size > 0) {
+        if (claimPublicationResults.length > 0) {
             resultSet = Immutable.fromJS(claimPublicationResults);
 
             if (resultSet.length > claimPublicationsInformation.maxSearchResults) {
@@ -86,39 +80,31 @@ export default class ClaimPublication extends React.Component {
         } = this.props;
 
         const resultSet = this.extractResultSet();
-        const noOfResults = claimPublicationResults.size;
+        const noOfResults = claimPublicationResults.length;
 
-        const resultsCountText = `${resultSet.size} out of ${noOfResults} potential match(es) displayed. Select any item to claim it as your work.`;
+        const resultsCountText = `${resultSet.length} out of ${noOfResults} potential match(es) displayed. Select any item to claim it as your work.`;
         return (
             <div className="layout-fill">
                 <h1 className="page-title display-1">{claimPublicationsInformation.title}</h1>
 
-                {loadingSearch &&
-                    <div className="is-centered">
-                        <InlineLoader message="Searching for your publications..." />
-                    </div>
-                }
+                <ClaimPublicationSearchResults
+                    title={resultsInformation.title}
+                    explanationText={resultsCountText}
+                    claimRecordBtnLabel={resultsInformation.claimRecordBtnLabel}
+                    help={resultsInformation.help}
+                />
 
                 {!loadingSearch && noOfResults > 0 &&
-                    <div>
-                        <SearchResults
-                            dataSource={resultSet}
-                            title={resultsInformation.title}
-                            explanationText={resultsCountText}
-                            claimRecordBtnLabel={resultsInformation.claimRecordBtnLabel}
-                            help={resultsInformation.help}
-                        />
-                        <div className="layout-card">
-                            <div className="columns">
-                                <div className="column is-hidden-mobile" />
-                                <div className="column is-narrow-desktop is-12-mobile is-pulled-right">
-                                    <RaisedButton
-                                        label={claimPublicationsInformation.formButtons.notMineLabel}
-                                        secondary
-                                        fullWidth
-                                        onTouchTap={this.confirmMarkPublicationsNotMine}
-                                    />
-                                </div>
+                    <div className="layout-card">
+                        <div className="columns">
+                            <div className="column is-hidden-mobile" />
+                            <div className="column is-narrow-desktop is-12-mobile is-pulled-right">
+                                <RaisedButton
+                                    label={claimPublicationsInformation.formButtons.notMineLabel}
+                                    secondary
+                                    fullWidth
+                                    onTouchTap={this.confirmMarkPublicationsNotMine}
+                                />
                             </div>
                         </div>
                     </div>

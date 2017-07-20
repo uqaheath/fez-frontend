@@ -14,8 +14,8 @@ ClaimPublicationContainer = connect((state) => {
     const claimPublications = state.get('claimPublication');
     return {
         account: appState.get('account'),
-        loadingSearch: claimPublications.get('loadingSearch'),
-        claimPublicationResults: claimPublications.get('claimPublicationResults')
+        loadingSearch: state.get('searchResult').get('loadingSearch'),
+        claimPublicationResults: claimPublications.get('searchResultsList')
     };
 }, dispatch => {
     return {
