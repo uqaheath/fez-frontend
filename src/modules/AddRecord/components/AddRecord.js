@@ -12,9 +12,9 @@ const STEP_3 = 2;
 
 // forms & custom components
 import {PublicationSearchForm} from 'modules/Forms';
-import {SearchResults} from 'modules/SearchResults';
 import {PublicationTypeForm} from 'modules/Forms/PublicationType';
 import {AddJournalArticleForm} from 'modules/Forms/JournalArticle';
+import AddRecordPublicationSearchResults from '../containers/AddRecordPublicationSearchResults';
 
 import {locale} from 'config';
 import {isDOIValue, isPartialDOIValue, isPubMedValue} from 'modules/Forms/PublicationSearch/validator';
@@ -122,11 +122,11 @@ export default class AddRecord extends React.Component {
 
                 return (
                     <div>
-                        <SearchResults
-                            title={searchResultsInformation.title}
-                            explanationText={searchResultsInformation.explanationText}
-                            claimRecordBtnLabel={searchResultsInformation.claimRecordBtnLabel}
-                            help={searchResultsInformation.help}
+                        <AddRecordPublicationSearchResults
+                            title={ searchResultsInformation.title }
+                            explanationText={ searchResultsInformation.explanationText }
+                            claimRecordBtnLabel={ searchResultsInformation.claimRecordBtnLabel }
+                            help={ searchResultsInformation.help }
                         />
 
                         {
@@ -178,7 +178,7 @@ export default class AddRecord extends React.Component {
                                 <div style={{maxWidth: '1200px', margin: '24px auto', width: '90%', textAlign: 'right'}}>
                                     <RaisedButton
                                         label={buttonLabels.abandon}
-                                        onTouchTap={this.cancelAddingRecord}/>
+                                        onTouchTap={this.props.abandonSearch}/>
                                 </div>
                             }
 
