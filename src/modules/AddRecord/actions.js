@@ -1,6 +1,6 @@
 // Repositories
 import {loadPublicationTypesData} from 'repositories/publicationTypes';
-import { CLEAR_SEARCH_RESULTS } from '../SearchResults/constants';
+import { CLEAR_SEARCH_RESULTS } from '../../constants/search';
 
 // Types
 export const PUBLICATION_TYPES_LOADING = 'PUBLICATION_TYPES_LOADING';
