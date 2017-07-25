@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import PartialDateForm from './PartialDateForm';
 
-require('datejs');
+const moment = require('moment');
 
 export default class PartialDate extends Component {
     static propTypes = {
@@ -16,53 +16,40 @@ export default class PartialDate extends Component {
     };
 
     static defaultProps = {
-        dateFormat: 'yyyy-MM-dd',
+        dateFormat: 'YYYY-MM-DD',
         allowPartial: false
     };
 
     constructor(props) {
-        console.log(props);
         super(props);
-        this.errors = {};
-    }
 
-    state = {
-        day: null,
-        month: null,
-        year: null,
-        formattedDate: ''
-    };
+        this.state = { date: '' };
+    }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log(this.validateDate(nextState));
-        if (this.validateDate(nextState)) {
-            nextState.formattedDate = Date.today().set(nextState).toString(this.props.dateFormat);
-        }
-        if (this.props.onChange) this.props.onChange(nextState);
+        // notify parent component when local state has been updated, eg contributors added/removed/reordered
+        if (this.props.onChange) this.props.onChange(nextState.date);
     }
 
-    validateDate(state) {
-        if (this.props.allowPartial) {
-            this.errors.year = (isNaN(state.year) || state.year > (new Date()).getFullYear()) ? true : undefined;
-            return !(this.errors.year);
-        } else {
-            this.errors.day = isNaN(state.day) ? true : undefined;
-            this.errors.year = isNaN(state.year) ? true : undefined;
-            this.errors.month = state.month === -1 ? true : undefined;
-            return !(this.errors.day || this.errors.year || this.errors.month);
-        }
-    }
+    _setDate = (date) => {
+        const { dateFormat } = this.props;
 
-    constructDate = (date) => {
-        this.setState({
-            ...this.state,
-            ...date
-        });
+        if (this.props.allowPartial || date.year !== null) {
+            this.setState({ date: this._formattedDate(date, dateFormat) });
+        }
+    };
+
+    _formattedDate = (date, dateFormat) => {
+        return moment(date).format(dateFormat);
+    };
+
+    reset = () => {
+        this.setState({ date: '' });
     };
 
     render() {
         return (
-            <PartialDateForm onDateSelected={ this.constructDate } errors={ this.errors } />
+            <PartialDateForm onDateSelected={ this._setDate } allowPartial={ this.props.allowPartial } resetDate={ this.reset } />
         );
     }
 }

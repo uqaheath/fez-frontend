@@ -5,12 +5,13 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
+const moment = require('moment');
 class PartialDateForm extends Component {
-
     static propTypes = {
         locale: PropTypes.object,
         onDateSelected: PropTypes.func,
-        errors: PropTypes.object
+        allowPartial: PropTypes.bool,
+        resetDate: PropTypes.func
     };
 
     static defaultProps = {
@@ -19,41 +20,56 @@ class PartialDateForm extends Component {
             monthLabel: 'Month',
             yearLabel: 'Year',
             validateMessage: 'Invalid date'
-        }
+        },
+        allowPartial: false
     };
 
     constructor(props) {
         super(props);
+        this.state = {
+            day: null,
+            month: null,
+            year: null
+        };
+        this.errors = {};
     }
 
-    state = {
-        day: null,
-        month: null,
-        year: null
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState !== this.state;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if (this._validate(nextState)) {
+            this.props.onDateSelected(nextState);
+        } else {
+            this.props.resetDate();
+        }
+    }
+
+    _validate = (state) => {
+        this.errors.year = (state.year > 0 && moment(state).isAfter(new Date(), 'year')) || isNaN(state.year);
+        this.errors.month = state.month < 0;
+
+        if (this.props.allowPartial) {
+            this.errors.day = state.day && ! moment(state).isValid();
+        } else {
+            this.errors.day = isNaN(state.day) || state.day < 1;
+            this.errors.day = !(this.errors.day || this.errors.month || this.errors.year) ? ! moment(state).isValid() : this.errors.day;
+        }
+
+        return !(this.errors.year || this.errors.month || this.errors.day);
     };
 
     _onDayChanged = (event) => {
-        const value = parseInt(event.target.value, 10);
-        this.setState({
-            day: value
-        });
-        this.props.onDateSelected({ day: value});
+        this.setState({ day: parseInt(event.target.value, 10) });
     };
 
     _onMonthChanged = (event, index, value) => {
-        const val = parseInt(value, 10);
-        this.setState({
-            month: val
-        });
-        this.props.onDateSelected({ month: val});
+        this.setState({ month: parseInt(value, 10) });
     };
 
     _onYearChanged = (event) => {
-        const value = parseInt(event.target.value, 10);
-        this.setState({
-            year: value
-        });
-        this.props.onDateSelected({ year: value});
+        this.setState({ year: parseInt(event.target.value, 10) });
     };
 
     render() {
@@ -70,8 +86,9 @@ class PartialDateForm extends Component {
                             fullWidth
                             floatingLabelText={ locale.dayLabel }
                             floatingLabelFixed
-                            errorText={ this.props.errors.day ? locale.validateMessage : '' }
-                            onBlur={ this._onDayChanged }
+                            errorText={ this.errors.day ? locale.validateMessage : '' }
+                            onChange={ this._onDayChanged }
+                            onBlur={ !this.props.allowPartial ? this._onDayChanged : undefined }
                         />
                     </div>
                     <div className="form-spacer"/>
@@ -83,7 +100,7 @@ class PartialDateForm extends Component {
                             style={{ marginTop: '12px' }}
                             floatingLabelText={ locale.monthLabel }
                             floatingLabelFixed
-                            errorText={ this.props.errors.month ? locale.validateMessage : '' }
+                            errorText={ this.errors.month ? locale.validateMessage : '' }
                             onChange={ this._onMonthChanged }>
                             <MenuItem key={-1} value={-1} primaryText=""/>
                             <MenuItem key={0} value={0} primaryText="January"/>
@@ -110,7 +127,7 @@ class PartialDateForm extends Component {
                             maxLength="4"
                             floatingLabelText={ locale.yearLabel }
                             floatingLabelFixed
-                            errorText={ this.props.errors.year ? locale.validateMessage : '' }
+                            errorText={ this.errors.year ? locale.validateMessage : '' }
                             onBlur={ this._onYearChanged }
                         />
                     </div>
