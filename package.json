@@ -50,6 +50,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "connected-react-router": "^4.0.0",
+    "datejs": "^1.0.0-rc3",
     "diffract": "^0.3.2",
     "history": "^4.4.1",
     "immutable": "^3.8.1",
