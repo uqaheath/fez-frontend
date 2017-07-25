@@ -3,10 +3,15 @@ import {PropTypes} from 'prop-types';
 import {StandardPage, StandardCard} from 'uqlibrary-react-toolbox';
 import {PublicationsList} from '../PublicationsList';
 import {externalTitleSearchResultsList} from 'mock/data/publicationSearch';
+import SampleForm from '../SharedComponents/PartialDate/SampleForm';
 
 export default function Browse({title, text, help}) {
     return (
         <StandardPage title={title}>
+            <StandardCard title="Partial Date">
+                <SampleForm />
+            </StandardCard>
+
             <StandardCard title={title} help={help}>
                 {text}
             </StandardCard>
