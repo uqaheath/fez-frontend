@@ -1,6 +1,6 @@
 import React from 'react';
-import PartialDate from './components/PartialDate';
+import PartialDateForm from './components/PartialDateForm';
 
 export default function PartialDateField(fieldProps) {
-    return(<PartialDate onChange={ fieldProps.input.onChange } {...fieldProps} />);
+    return(<PartialDateForm onChange={ fieldProps.input.onChange } {...fieldProps} />);
 }
