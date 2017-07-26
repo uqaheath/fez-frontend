@@ -12,10 +12,12 @@ import PartialDateField from './PartialDateField';
 const SampleForm = () => {
     return(
         <form>
-            <StandardCard title="allowedPartial: true, dateFormat:'YYYY-MM-DD'">
+            <StandardCard>
+                <h3>Partial Date</h3>
                 <Field name="startDate" component={ PartialDateField } dateFormat="YYYY-MM-DD" allowPartial />
             </StandardCard>
-            <StandardCard title="allowedPartial: false, dateFormat:'DD/MM/YYYY'">
+            <StandardCard>
+                <h3>Full</h3>
                 <Field name="endDate" component={ PartialDateField } dateFormat="DD/MM/YYYY"/>
             </StandardCard>
         </form>
