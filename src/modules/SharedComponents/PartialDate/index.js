@@ -1,1 +1,1 @@
-import { default as PartialDateField } from './components/PartialDate';
+export { default as PartialDateField } from './PartialDateField';

@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import { reduxForm, getFormValues } from 'redux-form/immutable';
 import { Field } from 'redux-form';
 import { StandardCard } from 'uqlibrary-react-toolbox';
-import PartialDateField from './PartialDateField';
+import { PartialDateField } from '.';
 
 const SampleForm = () => {
     return(

@@ -106,7 +106,7 @@ class PartialDateForm extends Component {
                             errorText={ this.errors.day }
                             onKeyPress={ this._isNumber }
                             onChange={ this._onDateChanged('day') }
-                            onBlur={ !this.props.allowPartial && this._onDateChanged('day') }
+                            onBlur={ !this.props.allowPartial ? this._onDateChanged('day') : undefined }
                         />
                     </div>
                     <div className="form-spacer"/>
