@@ -92,6 +92,7 @@ class PartialDateForm extends Component {
                             floatingLabelText={ locale.dayLabel }
                             floatingLabelFixed
                             errorText={ this.errors.day ? locale.validateMessage.day : '' }
+                            onKeyPress={ (e) => (e.charCode < 48 || e.charCode > 57 ? e.preventDefault() : undefined) }
                             onChange={ (e, v) => (this.setState({ day: parseInt(v, 10)})) }
                             onBlur={ !this.props.allowPartial ? (e) => (this.setState({ day: parseInt(e.target.value, 10)})) : undefined }
                         />
@@ -133,6 +134,7 @@ class PartialDateForm extends Component {
                             floatingLabelText={ locale.yearLabel }
                             floatingLabelFixed
                             errorText={ this.errors.year ? locale.validateMessage.year : '' }
+                            onKeyPress={ (e) => (e.charCode < 48 || e.charCode > 57 ? e.preventDefault() : undefined) }
                             onChange={ (e, v) => (this.setState({ year: parseInt(v, 10)})) }
                             onBlur={ (e) => (this.setState({ year: parseInt(e.target.value, 10)})) }
                         />
