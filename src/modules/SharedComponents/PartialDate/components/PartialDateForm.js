@@ -12,7 +12,8 @@ class PartialDateForm extends Component {
         onChange: PropTypes.func,
         dateFormat: PropTypes.string,
         allowPartial: PropTypes.bool,
-        resetDate: PropTypes.func
+        resetDate: PropTypes.func,
+        months: PropTypes.array
     };
 
     static defaultProps = {
@@ -26,6 +27,7 @@ class PartialDateForm extends Component {
                 year: 'Invalid year'
             }
         },
+        months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
         dateFormat: 'YYYY-MM-DD',
         allowPartial: false
     };
@@ -51,13 +53,13 @@ class PartialDateForm extends Component {
         this.errors.year = isNaN(year);
 
         if (this.props.allowPartial) {
-            valid = !isNaN(year) && moment(state).isValid();
-            this.errors.month = year > 0 && month < 0;
-            this.errors.day = day && year > 0 && month > -1 && !valid;
+            valid = !isNaN(year) && year !== null && moment(state).isValid();
+            this.errors.month = year && month < 0;
+            this.errors.day = day && year && month > -1 && !valid;
         } else {
-            valid = moment(state).isValid() && !isNaN(day) && day > 0 && !isNaN(year) && year > 0 && month !== null;
+            valid = moment(state).isValid() && !isNaN(day) && day !== null && !isNaN(year) && year !== null && month !== null;
             this.errors.month = month < 0;
-            this.errors.day = isNaN(day) || ((month !== null || month > -1) && year > 0 && !valid);
+            this.errors.day = isNaN(day) || ((month !== null || month > -1) && year && !valid);
         }
 
         return valid;
@@ -74,7 +76,15 @@ class PartialDateForm extends Component {
     };
 
     render() {
-        const { locale } = this.props;
+        const { locale, months } = this.props;
+        const renderMonths = months.map((month, index) =>
+            <MenuItem
+                key={index}
+                value={index}
+                primaryText={month}
+            />
+        );
+
         return (
             <div className="column">
                 <div className="columns">
@@ -105,18 +115,7 @@ class PartialDateForm extends Component {
                             errorText={ this.errors.month ? locale.validateMessage.month : '' }
                             onChange={ (e, k, v) => (this.setState({ month: v})) }>
                             <MenuItem key={-1} value={-1} primaryText=""/>
-                            <MenuItem key={0} value={0} primaryText="January"/>
-                            <MenuItem key={1} value={1} primaryText="February"/>
-                            <MenuItem key={2} value={2} primaryText="March"/>
-                            <MenuItem key={3} value={3} primaryText="April"/>
-                            <MenuItem key={4} value={4} primaryText="May"/>
-                            <MenuItem key={5} value={5} primaryText="June"/>
-                            <MenuItem key={6} value={6} primaryText="July"/>
-                            <MenuItem key={7} value={7} primaryText="August"/>
-                            <MenuItem key={8} value={8} primaryText="September"/>
-                            <MenuItem key={9} value={9} primaryText="October"/>
-                            <MenuItem key={10} value={10} primaryText="November"/>
-                            <MenuItem key={11} value={11} primaryText="December"/>
+                            { renderMonths }
                         </SelectField>
                     </div>
                     <div className="form-spacer"/>
