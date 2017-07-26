@@ -12,7 +12,6 @@ class PartialDateForm extends Component {
         onChange: PropTypes.func,
         dateFormat: PropTypes.string,
         allowPartial: PropTypes.bool,
-        resetDate: PropTypes.func,
         months: PropTypes.array
     };
 
@@ -21,11 +20,13 @@ class PartialDateForm extends Component {
             dayLabel: 'Day',
             monthLabel: 'Month',
             yearLabel: 'Year',
-            validateMessage: {
+            validationMessage: {
                 day: 'Invalid day',
                 month: 'Invalid month',
                 year: 'Invalid year'
-            }
+            },
+            minNumberCharCode: 48,
+            maxNumberCharCode: 57
         },
         months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
         dateFormat: 'YYYY-MM-DD',
@@ -49,17 +50,18 @@ class PartialDateForm extends Component {
     _validate = (state) => {
         let valid;
         const { day, month, year } = state;
+        const { locale } = this.props;
 
-        this.errors.year = isNaN(year);
+        this.errors.year = isNaN(year) ? locale.validationMessage.year : '';
 
         if (this.props.allowPartial) {
             valid = !isNaN(year) && year !== null && moment(state).isValid();
-            this.errors.month = year && month < 0;
-            this.errors.day = day && year && month > -1 && !valid;
+            this.errors.month = (year && month < 0) ? locale.validationMessage.month : '';
+            this.errors.day = (day && year && month > -1 && !valid) ? locale.validationMessage.day : '';
         } else {
             valid = moment(state).isValid() && !isNaN(day) && day !== null && !isNaN(year) && year !== null && month !== null;
-            this.errors.month = month < 0;
-            this.errors.day = isNaN(day) || ((month !== null || month > -1) && year && !valid);
+            this.errors.month = month < 0  ? locale.validationMessage.month : '';
+            this.errors.day = (isNaN(day) || ((month !== null || month > -1) && year && !valid))  ? locale.validationMessage.day : '';
         }
 
         return valid;
@@ -74,6 +76,13 @@ class PartialDateForm extends Component {
         }
         return '';
     };
+
+    _isNumber = (event) => {
+        const { locale } = this.props;
+        if (event.charCode < locale.minNumberCharCode || event.charCode > locale.maxNumberCharCode) event.preventDefault();
+    };
+
+    _onDateChanged = (key) => (event, index, value) => this.setState({ [key]: parseInt(event.target.value === undefined ? value : event.target.value, 10)});
 
     render() {
         const { locale, months } = this.props;
@@ -97,10 +106,10 @@ class PartialDateForm extends Component {
                             fullWidth
                             floatingLabelText={ locale.dayLabel }
                             floatingLabelFixed
-                            errorText={ this.errors.day ? locale.validateMessage.day : '' }
-                            onKeyPress={ (e) => (e.charCode < 48 || e.charCode > 57 ? e.preventDefault() : undefined) }
-                            onChange={ (e, v) => (this.setState({ day: parseInt(v, 10)})) }
-                            onBlur={ !this.props.allowPartial ? (e) => (this.setState({ day: parseInt(e.target.value, 10)})) : undefined }
+                            errorText={ this.errors.day }
+                            onKeyPress={ this._isNumber }
+                            onChange={ this._onDateChanged('day') }
+                            onBlur={ !this.props.allowPartial && this._onDateChanged('day') }
                         />
                     </div>
                     <div className="form-spacer"/>
@@ -112,8 +121,8 @@ class PartialDateForm extends Component {
                             style={{ marginTop: '12px' }}
                             floatingLabelText={ locale.monthLabel }
                             floatingLabelFixed
-                            errorText={ this.errors.month ? locale.validateMessage.month : '' }
-                            onChange={ (e, k, v) => (this.setState({ month: v})) }>
+                            errorText={ this.errors.month }
+                            onChange={ this._onDateChanged('month') }>
                             <MenuItem key={-1} value={-1} primaryText=""/>
                             { renderMonths }
                         </SelectField>
@@ -128,10 +137,10 @@ class PartialDateForm extends Component {
                             maxLength="4"
                             floatingLabelText={ locale.yearLabel }
                             floatingLabelFixed
-                            errorText={ this.errors.year ? locale.validateMessage.year : '' }
-                            onKeyPress={ (e) => (e.charCode < 48 || e.charCode > 57 ? e.preventDefault() : undefined) }
-                            onChange={ (e, v) => (this.setState({ year: parseInt(v, 10)})) }
-                            onBlur={ (e) => (this.setState({ year: parseInt(e.target.value, 10)})) }
+                            errorText={ this.errors.year }
+                            onKeyPress={ this._isNumber }
+                            onChange={ this._onDateChanged('year') }
+                            onBlur={ this._onDateChanged('year') }
                         />
                     </div>
                 </div>
