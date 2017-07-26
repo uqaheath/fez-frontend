@@ -68,13 +68,9 @@ class PartialDateForm extends Component {
             if (this.props.allowPartial) {
                 date.month = date.month < 0 ? 0 : date.month;
             }
-            return this._formattedDate(date, this.props.dateFormat);
+            return moment(date).format(this.props.dateFormat);
         }
         return '';
-    };
-
-    _formattedDate = (date, dateFormat) => {
-        return moment(date).format(dateFormat);
     };
 
     render() {
