@@ -67,11 +67,6 @@ class Dashboard extends React.Component {
                                     <CircularProgress size={30} thickness={3}/>
                                 </div>
                             )}
-                            {/* {!authorDetails && !authorDetailsLoading && (*/}
-                                {/* <Alert title="You are not registered in UQ eSpace Staging as an author"*/}
-                                       {/* message="Please contact the UQ Manager to resolve this."*/}
-                                       {/* type="info_outline"/>*/}
-                            {/* )}*/}
                         </div>
 
                         <div className="notification-wrap column is-12">

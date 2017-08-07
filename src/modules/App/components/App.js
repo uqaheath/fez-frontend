@@ -143,20 +143,19 @@ export default class App extends React.Component {
                             </Switch>
                             {!account ? (
                                 <Alert
-                                    title="You are not logged in"
-                                    message="So ner"
-                                    type="warning"
+                                    title={locale.pages.app.alerts.notLoggedInTitle}
+                                    message={locale.pages.app.alerts.notLoggedInMessage}
+                                    type={locale.pages.app.alerts.notLoggedInType}
                                     outsideLayout />
                             ) : (
                                 !authorDetails && (
-                                <Alert
-                                title="You are not registered in UQ eSpace Staging as an author"
-                                message="Please contact the UQ Manager to resolve this."
-                                type="info_outline"
-                                outsideLayout />
-                            ))}
+                                    <Alert
+                                        title={locale.pages.app.alerts.notAuthorTitle}
+                                        message={locale.pages.app.alerts.notAuthorMessage}
+                                        type={locale.pages.app.alerts.notAuthorType}
+                                        outsideLayout />
+                                ))}
                         </div>
-
                         <HelpDrawer />
                     </div>
                 )}
