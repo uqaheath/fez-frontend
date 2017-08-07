@@ -505,7 +505,7 @@ export default {
             ariaPrefix: 'Photograph of '
         },
         dashboardResearcherIds: {
-            researcherIsLinked: 'Your [resource] Id is [id]',
+            researcherIsLinked: 'Your [resource] Id is [id] - Click to visit your profile',
             researcherIsNotLinked: 'Link your [resource] ID to UQ eSpace',
             orcidUrlPrefix: 'http://orcid.org/',
             orcidLinkPrefix: 'orcid.org/',
