@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Route, Switch} from 'react-router';
 import AppBar from 'material-ui/AppBar';
 
-import {AppLoader, MenuDrawer, HelpDrawer} from 'uqlibrary-react-toolbox';
+import {AppLoader, MenuDrawer, HelpDrawer, Alert} from 'uqlibrary-react-toolbox';
 
 import {defaultMenuItems, researcherMenuItems} from 'config';
 import {locale} from 'config';
@@ -26,6 +26,7 @@ export default class App extends React.Component {
     static propTypes = {
         error: PropTypes.object,
         account: PropTypes.object,
+        authorDetails: PropTypes.object,
         loaded: PropTypes.bool.isRequired,
         loadAccount: PropTypes.func.isRequired,
         getCurrentAuthor: PropTypes.func.isRequired,
@@ -72,6 +73,7 @@ export default class App extends React.Component {
         const {
             error,
             account,
+            authorDetails,
             loaded,
             menuDrawerOpen,
         } = this.props;
@@ -139,6 +141,20 @@ export default class App extends React.Component {
                                     <Route key={index} {...route} />
                                 ))}
                             </Switch>
+                            {!account ? (
+                                <Alert
+                                    title="You are not logged in"
+                                    message="So ner"
+                                    type="warning"
+                                    outsideLayout />
+                            ) : (
+                                !authorDetails && (
+                                <Alert
+                                title="You are not registered in UQ eSpace Staging as an author"
+                                message="Please contact the UQ Manager to resolve this."
+                                type="info_outline"
+                                outsideLayout />
+                            ))}
                         </div>
 
                         <HelpDrawer />

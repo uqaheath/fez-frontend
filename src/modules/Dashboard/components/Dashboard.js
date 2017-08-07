@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import CircularProgress from 'material-ui/CircularProgress';
 import AuthorsPublicationsCount from '../../DonutChart/components/AuthorsPublicationsCount';
-import {AuthorsPublicationsPerYearChart, Alert} from 'uqlibrary-react-toolbox';
+import {AuthorsPublicationsPerYearChart} from 'uqlibrary-react-toolbox';
 import {loadAuthorDetails} from 'actions';
 import DashboardAuthorProfile from './DashboardAuthorProfile';
 
@@ -67,11 +67,11 @@ class Dashboard extends React.Component {
                                     <CircularProgress size={30} thickness={3}/>
                                 </div>
                             )}
-                            {!authorDetails && !authorDetailsLoading && (
-                                <Alert title="You are not registered in UQ eSpace Staging as an author"
-                                       message="Please contact the UQ Manager to resolve this."
-                                       type="info_outline"/>
-                            )}
+                            {/* {!authorDetails && !authorDetailsLoading && (*/}
+                                {/* <Alert title="You are not registered in UQ eSpace Staging as an author"*/}
+                                       {/* message="Please contact the UQ Manager to resolve this."*/}
+                                       {/* type="info_outline"/>*/}
+                            {/* )}*/}
                         </div>
 
                         <div className="notification-wrap column is-12">
