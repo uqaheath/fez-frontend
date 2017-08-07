@@ -506,10 +506,19 @@ export default {
         },
         dashboardResearcherIds: {
             researcherIsLinked: 'Your [resource] Id is [id]',
-            researcherIsNotLinked: 'You are not linked to [resource]',
+            researcherIsNotLinked: 'Link your [resource] ID to UQ eSpace',
             orcidUrlPrefix: 'http://orcid.org/',
             orcidLinkPrefix: 'orcid.org/',
-            orcidlinkLabel: 'Click to visit your ORCId profile'
+            orcidlinkLabel: 'Click to visit your ORCID profile',
+            orcidNotlinkedLabel: 'Click to link your ORCID ID',
+            AppLibraryResearcherIdsLink: 'https://app.library.uq.edu.au/#/id'
+        },
+        dashboard: {
+            help: {
+                title: 'Your dashboard profile',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet ac risus et blandit. Vivamus varius ornare metus vitae sagittis. Donec erat urna, interdum vitae faucibus a, tempus eu orci. Aenean venenatis lacus eu sapien dignissim, non rhoncus dolor facilisis. Donec finibus tristique nunc nec facilisis. Pellentesque luctus libero faucibus ex mattis, vitae commodo nunc vehicula. Nam nec porttitor sapien. Sed rutrum, mauris id luctus eleifend, eros lectus auctor nibh, a eleifend est est eu nunc.',
+                button: 'OK'
+            },
         }
     },
     sharedComponents: {
