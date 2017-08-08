@@ -1,9 +1,6 @@
 import React from 'react';
 import DonutChart from './DonutChart';
 
-// TODO: chart doesn't look good on mobile view if there's a lot of years/publications - update styles for mobile view - display last 5 years on mobile view?
-// TODO: possible feature: cache processed data in browser (per user)
-
 class AuthorsPublicationsCount extends React.Component {
 
     constructor(props) {
@@ -11,31 +8,20 @@ class AuthorsPublicationsCount extends React.Component {
 
         this.state = {
             options: {
-                colors: ['#49075E', '#468fcc', '#f28620', '#fff'],
                 chart: {
-                    backgroundColor: '#ed5c8f',
-                    plotBackgroundColor: '#ed5c8f',
                     plotShadow: false,
                     plotBorderWidth: 0,
-                    plotPadding: 10,
+                    spacingBottom: 10,
                     type: 'pie',
                 },
                 credits: {
                     enabled: false
                 },
                 legend: {
-                    align: 'right',
+                    align: 'center',
                     symbolRadius: 0,
                     floating: true,
                     layout: 'vertical',
-                    itemStyle: {
-                        'font-size': '1.1em',
-                        'font-family': 'Roboto',
-                        'font-weight': '300',
-                        'color': '#FFF',
-                        'textOverflow': 'ellipsis',
-                        'paddingBottom': '120px'
-                    },
                     y: 0
                 },
                 tooltip: {
@@ -51,7 +37,8 @@ class AuthorsPublicationsCount extends React.Component {
                     pie: {
                         showInLegend: true,
                         dataLabels: {
-                            distance: 5,
+                            connectorWidth: 2,
+                            distance: 10,
                             overflow: 'none',
                             className: 'pieLabels ',
                             format: '{y}',
@@ -60,7 +47,7 @@ class AuthorsPublicationsCount extends React.Component {
                         },
                         shadow: false,
                         center: ['50%', '40%'],
-                        size: '80%',
+                        size: '75%',
                         innerSize: '70%',
                         borderColor: 'none',
                     },
@@ -68,10 +55,10 @@ class AuthorsPublicationsCount extends React.Component {
                 series: [{
                     name: 'Document count by type',
                     data: [
-                        ['Journal articles', 429.9],
-                        ['Conference papers', 112.5],
-                        ['Magazine articles', 106.4],
-                        ['Other', 129.2]
+                        ['Journal articles', 329],
+                        ['Conference papers', 112],
+                        ['Magazine articles', 106],
+                        ['Other', 12]
                     ],
                 }]
 
@@ -81,9 +68,7 @@ class AuthorsPublicationsCount extends React.Component {
 
     render() {
         return (
-          <div>
-              <DonutChart className="authors-publications-count" chartOptions={this.state.options}/>
-          </div>
+              <DonutChart className="authors-publications-count" chartOptions={this.state.options} />
         );
     }
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardText, CardHeader} from 'material-ui/Card';
-import {publicationYearsBig as publicationYearsMockData} from '../../../mock/data/academic/publicationYears';
+import {publicationYearsBig as publicationYearsMockDataBig} from '../../../mock/data/academic/publicationYears';
+import {publicationYearsSmall as publicationYearsMockDataSmall} from '../../../mock/data/academic/publicationYears';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
@@ -101,14 +102,19 @@ class Dashboard extends React.Component {
 
                     <div className="columns is-gapless">
                         <div className="column">
-                            <Card style={{backgroundColor: '#36B6D6'}}>
+                            <Card className="barChart">
                                 <CardHeader className="card-header">
                                     <h2 className="title is-4 color-reverse">eSpace publications by year</h2>
                                 </CardHeader>
-
-                                <CardText className="body-1">
-                                    <AuthorsPublicationsPerYearChart rawData={publicationYearsMockData}
+                                <CardText className="body-1 is-paddingless"><br />
+                                    <div className="is-hidden-mobile is-paddingless">
+                                    <AuthorsPublicationsPerYearChart rawData={publicationYearsMockDataBig}
                                                                      yAxisTitle="Total publications"/>
+                                    </div>
+                                    <div className="is-hidden-tablet is-paddingless">
+                                    <AuthorsPublicationsPerYearChart rawData={publicationYearsMockDataSmall}
+                                                                     yAxisTitle="Total publications"/>
+                                    </div>
                                 </CardText>
                             </Card>
                         </div>
@@ -116,12 +122,12 @@ class Dashboard extends React.Component {
 
                     <div className="columns">
                         <div className="column is-4">
-                            <Card style={{backgroundColor: '#ed5c8f'}}>
+                            <Card className="donutChart">
                                 <CardHeader className="card-header">
                                     <h2 className="title is-4 color-reverse">Document types overview</h2>
                                 </CardHeader>
 
-                                <CardText className="body-1">
+                                <CardText className="body-1 is-paddingless">
                                     <AuthorsPublicationsCount/>
                                 </CardText>
                             </Card>
