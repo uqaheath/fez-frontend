@@ -8,8 +8,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import CircularProgress from 'material-ui/CircularProgress';
-import AuthorsPublicationsCount from '../../DonutChart/components/AuthorsPublicationsCount';
-import {AuthorsPublicationsPerYearChart, Alert} from 'uqlibrary-react-toolbox';
+import {AuthorsPublicationsPerYearChart, AuthorsPublicationsCount, Alert} from 'uqlibrary-react-toolbox';
 import {loadAuthorDetails} from 'actions';
 import DashboardAuthorProfile from './DashboardAuthorProfile';
 
@@ -128,7 +127,7 @@ class Dashboard extends React.Component {
                                 </CardHeader>
 
                                 <CardText className="body-1 is-paddingless">
-                                    <AuthorsPublicationsCount/>
+                                    <AuthorsPublicationsCount />
                                 </CardText>
                             </Card>
                         </div>
