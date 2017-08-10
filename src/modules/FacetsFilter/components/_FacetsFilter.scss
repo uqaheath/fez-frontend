@@ -1,0 +1,38 @@
+@import '~uqlibrary-react-toolbox/sass/variables';
+
+.facetsFilter {
+  padding: 24px 24px 0 0;
+  min-width: 140px;
+
+  h3.title {
+    color: $theme-color;
+    margin-bottom: 0px;
+    padding-bottom: 6px;
+  }
+  .facetsKeywordFilter {
+    margin-bottom: 0px !important;
+  }
+  .facetsCategoryTitle {
+    margin: 6px 0 !important;
+  }
+  .facetsClearButton{
+    opacity: 0.3;
+      &:hover {
+        opacity: 0.8;
+      }
+    &:focus {
+      opacity: 1;
+    }
+  }
+  .facetsKeywordInput {
+  }
+  .facetsList{
+    .facetListItems {
+      padding-left: 6px;
+      font-weight: normal !important;
+      & div {
+        margin: 3px 0;
+      }
+    }
+  }
+}

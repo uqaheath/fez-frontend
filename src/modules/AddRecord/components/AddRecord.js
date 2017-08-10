@@ -4,6 +4,7 @@ import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import {StandardPage, StandardCard, InlineLoader, ConfirmDialogBox} from 'uqlibrary-react-toolbox';
 import PublicationListLoadingProgress from '../../PublicationsList/components/PublicationListLoadingProgress';
+import FacetsFilter from '../../FacetsFilter/components/FacetsFilter';
 
 // forms & custom components
 import {PublicationSearchForm} from 'modules/PublicationSearchForm';
@@ -95,7 +96,7 @@ export default class AddRecord extends React.Component {
           <div className="columns is-gapless is-multiline searchWrapper">
               {/* Mobile search dashboard (progress bar) */}
               <div className="column is-hidden-desktop is-hidden-tablet mobileWrapper">
-                  <PublicationListLoadingProgress loadingPublicationSources={this.props.loadingPublicationSources} mobile/>
+                   <PublicationListLoadingProgress loadingPublicationSources={this.props.loadingPublicationSources} mobile/>
               </div>
               {/* Search results */}
               <div className="column is-9-desktop is-8-tablet is-12-mobile">
@@ -146,7 +147,8 @@ export default class AddRecord extends React.Component {
               </div>
               {/* Desktop search dashboard */}
               <div className="column is-3-desktop is-4-tablet is-hidden-mobile">
-                  <PublicationListLoadingProgress loadingPublicationSources={this.props.loadingPublicationSources}/>
+                   <PublicationListLoadingProgress loadingPublicationSources={this.props.loadingPublicationSources}/>
+                      <FacetsFilter />
               </div>
           </div>
         );
