@@ -77,9 +77,9 @@ class FacetsFilter extends React.Component {
 
         return (
             <div className="facetsFilter">
-                <div className="columns is-gapless is-marginless is-paddingless">
+                <div className="columns is-gapless is-marginless is-paddingless facetsTitle">
                     <div className="column">
-                        <h3 className="facetsTitle title is-5">{txt.title}</h3>
+                        <h3 className="title is-5">{txt.title}</h3>
                     </div>
                     <div className="column is-narrow is-helpicon">
                         <HelpIcon
@@ -89,7 +89,7 @@ class FacetsFilter extends React.Component {
                         />
                     </div>
                 </div>
-                <div className="facetsKeywordFilter columns is-gapless">
+                <div className="facetsKeywordFilter columns is-gapless is-hidden">
                     <div className="column">
                         <TextField
                             id="facetsKeywordInput"
