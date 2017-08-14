@@ -5665,28 +5665,3 @@ export const facetData = {
             }
         }
     };
-
-// Make a list of allowed "aggregations" to render, as some aren't valid/needed
-// const allowedAggregations = ['journal_name_t_ft', 'genre_type_t_ft', 'subject_mi_lookup_exact', 'display_type_i_lookup_exact', 'date_year_t', 'keywords_mft', 'author_mft', 'scopus_doc_type_t_lookup_exact', 'author_id_mi_lookup_exact', 'ismemberof_mt_lookup_exact', 'subtype_t_ft'];
-
-// create an array of values using the allowedAggregations as a key to map data from thisData/facetData
-// const aggregations = allowedAggregations.map(key => {
-//     // temp store all the allowed aggregation data
-//     const thisData = facetData.aggregations[key];
-//     // return the following data format to const aggregations
-//     return {
-//         aggregation: key, // The original key value for aggregations
-//
-//         title: null, // Waiting on abckend to supply
-//
-//         doc_count: thisData.sum_other_doc_count, // Pull the document count for this category/aggregate
-//
-//         facets: thisData.buckets.map(item => { // Have to map facets info from buckets
-//             return {
-//                 title: item.key, // Some of the aggregate data's titles etc appear to be lookups which have the same data - so just made allowedAggregations to filter them for now.
-//                 key: item.key,
-//                 doc_count: item.doc_count
-//             };
-//         })
-//     };
-// });

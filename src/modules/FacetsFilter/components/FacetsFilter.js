@@ -12,6 +12,7 @@ class FacetsFilter extends React.Component {
         this.state = {
         };
         this.handleActiveLinkClick = this.handleActiveLinkClick.bind(this);
+        this.handleActiveCategoryClick = this.handleActiveCategoryClick.bind(this);
     }
 
     handleActiveLinkClick(e) {
@@ -22,6 +23,16 @@ class FacetsFilter extends React.Component {
             e.target.className = e.target.className.replace(' active', '');
         }
     }
+    handleActiveCategoryClick(e) {
+        e.preventDefault();
+        if (e.target.nextSibling.className.indexOf(' active') === -1) {
+            e.target.nextSibling.className += ' active';
+        } else {
+            e.target.nextSibling.className = e.target.nextSibling.className.replace(' active', '');
+        }
+    }
+
+    // TODO: A clear all facets button?
 
     render() {
         const txt = locale.components.facetsFilter;
@@ -61,17 +72,21 @@ class FacetsFilter extends React.Component {
                 <div className="facetsList body-2">
                     {aggregations.map((item, index) => (
                         <div>
-                            <div key={index} className="title is-6 facetsCategoryTitle"
-                                onClick={this.handleActiveLinkClick}
-                                onKeyPress={this.handleActiveLinkClick}>
+                            <div key={index} className="facetsCategory">
+                                <div className="facetsCategoryTitle"
+                                     onClick={this.handleActiveCategoryClick}
+                                     onKeyPress={this.handleActiveCategoryClick}>
                                     {item.title ? item.title : item.aggregation} <span>({item.doc_count})</span>
-                            </div>
-                            {item.facets.map((subitem, index) => (
-                                <div key={index} className="facetListItems" onClick={this.handleActiveLinkClick}
+                                </div>
+                                <div className="facetLinksList">
+                            {item.facets.map((subitem, subindex) => (
+                                <div key={subindex} className="facetListItems" onClick={this.handleActiveLinkClick}
                                      onKeyPress={this.handleActiveLinkClick}>
                                     {subitem.title} <span>({subitem.doc_count})</span>
                                 </div>
                             ))}
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
