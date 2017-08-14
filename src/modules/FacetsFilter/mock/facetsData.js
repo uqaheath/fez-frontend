@@ -1,28 +1,5 @@
 /* eslint-disable */
 
-// export const mockFacetsList = [
-//     {
-//         category: "Display type",
-//         facets: ["Journal article", "Thesis", "Conference paper", "Book", "Journal"],
-//         facetValues: [123, 324, 44, 234, 2345]
-//     },
-//     {
-//         category: "Published date",
-//         facets: ["2012", "2013", "2017"],
-//         facetValues: [12, 4, 1]
-//     },
-//     {
-//         category: "Display type",
-//         facets: ["Facet title 1", "Facet title 2", "Facet title 3"],
-//         facetValues: [34, 545, 2345]
-//     },
-//     {
-//         category: "Author ID",
-//         facets: ["Facet title 1", "Facet title 2", "Facet title 3"],
-//         facetValues: [35, 3, 30]
-//     },
-// ];
-
 export const facetData = {
         "took": 1659,
         "timed_out": false,
@@ -5181,392 +5158,482 @@ export const facetData = {
         },
         "aggregations": {
             "subject_mi": {
+                "display_name": "Subjects", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 288113,
                 "buckets": [
                     {
                         "key": 450009,
-                        "doc_count": 32144
+                        "doc_count": 32144,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 450018,
-                        "doc_count": 7431
+                        "doc_count": 7431,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 450014,
-                        "doc_count": 5751
+                        "doc_count": 5751,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 450013,
-                        "doc_count": 4901
+                        "doc_count": 4901,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 450006,
-                        "doc_count": 4299
+                        "doc_count": 4299,
+                        "title": "This is the facet title"
                     }
                 ]
-            },
+            }, // has a lookup
             "journal_name_t_ft": {
+                "display_name": "Journal name", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 186365,
                 "buckets": [
                     {
                         "key": "Medical Journal of Australia",
-                        "doc_count": 1402
+                        "doc_count": 1402,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "PLoS One",
-                        "doc_count": 1028
+                        "doc_count": 1028,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Journal of the Royal Historical Society of Queensland",
-                        "doc_count": 914
+                        "doc_count": 914,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Journal of Biological Chemistry",
-                        "doc_count": 618
+                        "doc_count": 618,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Physical Review A",
-                        "doc_count": 599
+                        "doc_count": 599,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "genre_type_t_ft": {
+                "display_name": "Genre", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 2145,
                 "buckets": [
                     {
                         "key": "PhD Thesis",
-                        "doc_count": 11454
+                        "doc_count": 11454,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Honours Thesis",
-                        "doc_count": 3184
+                        "doc_count": 3184,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Article (original research)",
-                        "doc_count": 2200
+                        "doc_count": 2200,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "MPhil Thesis",
-                        "doc_count": 1187
+                        "doc_count": 1187,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Master\'s Thesis",
-                        "doc_count": 1112
+                        "doc_count": 1112,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "subject_mi_lookup_exact": {
+                "display_name": "Subject", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 288113,
                 "buckets": [
                     {
                         "key": "C1",
-                        "doc_count": 32144
+                        "doc_count": 32144,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "EX",
-                        "doc_count": 7431
+                        "doc_count": 7431,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "E1",
-                        "doc_count": 5751
+                        "doc_count": 5751,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "CX",
-                        "doc_count": 4901
+                        "doc_count": 4901,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "B1",
-                        "doc_count": 4299
+                        "doc_count": 4299,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "display_type_i_lookup_exact": {
+                "display_name": "Display type", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 25341,
                 "buckets": [
                     {
                         "key": "Journal Article",
-                        "doc_count": 172277
+                        "doc_count": 172277,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Conference Paper",
-                        "doc_count": 55229
+                        "doc_count": 55229,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Thesis",
-                        "doc_count": 18728
+                        "doc_count": 18728,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Book Chapter",
-                        "doc_count": 16073
+                        "doc_count": 16073,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Image",
-                        "doc_count": 8638
+                        "doc_count": 8638,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "scopus_doc_type_t_ft": {
+                "display_name": "Scopus document type", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 4690,
                 "buckets": [
                     {
                         "key": "ar",
-                        "doc_count": 101049
+                        "doc_count": 101049,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "re",
-                        "doc_count": 9486
+                        "doc_count": 9486,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "cp",
-                        "doc_count": 8100
+                        "doc_count": 8100,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "ip",
-                        "doc_count": 4806
+                        "doc_count": 4806,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "le",
-                        "doc_count": 1970
+                        "doc_count": 1970,
+                        "title": "This is the facet title"
                     }
                 ]
-            },
+            }, // has a lookup
             "author_id_mi": {
+                "display_name": "Author ID", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 450489,
                 "buckets": [
                     {
                         "key": 0,
-                        "doc_count": 152722
+                        "doc_count": 152722,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 1968,
-                        "doc_count": 1069
+                        "doc_count": 1069,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 610,
-                        "doc_count": 865
+                        "doc_count": 865,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 993,
-                        "doc_count": 834
+                        "doc_count": 834,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 193,
-                        "doc_count": 762
+                        "doc_count": 762,
+                        "title": "This is the facet title"
                     }
                 ]
-            },
+            }, // has a lookup
             "date_year_t": {
+                "display_name": "Year published", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 213522,
                 "buckets": [
                     {
                         "key": "2013",
-                        "doc_count": 15674
+                        "doc_count": 15674,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "2012",
-                        "doc_count": 15305
+                        "doc_count": 15305,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "2015",
-                        "doc_count": 14810
+                        "doc_count": 14810,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "2014",
-                        "doc_count": 14656
+                        "doc_count": 14656,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "2010",
-                        "doc_count": 14259
+                        "doc_count": 14259,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "keywords_mft": {
+                "display_name": "Keywords", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 942172,
                 "buckets": [
                     {
                         "key": "Aboriginal Australians -- Languages",
-                        "doc_count": 2784
+                        "doc_count": 2784,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Queensland Speech Survey",
-                        "doc_count": 2782
+                        "doc_count": 2782,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Australia",
-                        "doc_count": 2777
+                        "doc_count": 2777,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "English Language -- Dialects â€“ Australia",
-                        "doc_count": 1973
+                        "doc_count": 1973,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "University of Queensland -- History",
-                        "doc_count": 1816
+                        "doc_count": 1816,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "ismemberof_mft": {
+                "display_name": "Collection", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 378105,
                 "buckets": [
                     {
                         "key": "UQ:152266",
-                        "doc_count": 52163
+                        "doc_count": 52163,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "UQ:3831",
-                        "doc_count": 32747
+                        "doc_count": 32747,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "UQ:183940",
-                        "doc_count": 15487
+                        "doc_count": 15487,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "UQ:218311",
-                        "doc_count": 14323
+                        "doc_count": 14323,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "UQ:308300",
-                        "doc_count": 13232
+                        "doc_count": 13232,
+                        "title": "This is the facet title"
                     }
                 ]
-            },
+            }, // has a lookup but named differently
             "author_mft": {
+                "display_name": "Author", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 1127539,
                 "buckets": [
                     {
                         "key": "Flint, Elwyn Henry",
-                        "doc_count": 2782
+                        "doc_count": 2782,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Brown, Carter",
-                        "doc_count": 1675
+                        "doc_count": 1675,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Keniger, Michael, 1947-",
-                        "doc_count": 1031
+                        "doc_count": 1031,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Vellacott-Jones, Kathleen",
-                        "doc_count": 1000
+                        "doc_count": 1000,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Hume Family",
-                        "doc_count": 683
+                        "doc_count": 683,
+                        "title": "This is the facet title"
                     }
                 ]
-            },
+            }, // has a lookup but named differently
             "display_type_i": {
+                "display_name": "Display type", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 25341,
                 "buckets": [
                     {
                         "key": 179,
-                        "doc_count": 172277
+                        "doc_count": 172277,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 130,
-                        "doc_count": 55229
+                        "doc_count": 55229,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 187,
-                        "doc_count": 18728
+                        "doc_count": 18728,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 177,
-                        "doc_count": 16073
+                        "doc_count": 16073,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": 238,
-                        "doc_count": 8638
+                        "doc_count": 8638,
+                        "title": "This is the facet title"
                     }
                 ]
-            },
+            }, // has a lookup
             "scopus_doc_type_t_lookup_exact": {
+                "display_name": "Scopus document type lookup", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 4690,
                 "buckets": [
                     {
                         "key": "Article",
-                        "doc_count": 101049
+                        "doc_count": 101049,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Review",
-                        "doc_count": 9486
+                        "doc_count": 9486,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Conference Paper",
-                        "doc_count": 8100
+                        "doc_count": 8100,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Article in Press",
-                        "doc_count": 4806
+                        "doc_count": 4806,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Letter",
-                        "doc_count": 1970
+                        "doc_count": 1970,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "author_id_mi_lookup_exact": {
+                "display_name": "Author ID", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 450468,
                 "buckets": [
                     {
                         "key": "",
-                        "doc_count": 152722
+                        "doc_count": 152722,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Hall, Wayne Denis (UQCCR)",
-                        "doc_count": 1069
+                        "doc_count": 1069,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Tisdell, Clement A.",
-                        "doc_count": 865
+                        "doc_count": 865,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Marwick, Thomas H.",
-                        "doc_count": 834
+                        "doc_count": 834,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Chanson, Hubert",
-                        "doc_count": 762
+                        "doc_count": 762,
+                        "title": "This is the facet title"
                     }
                 ]
             },
             "ismemberof_mt_lookup_exact": {
+                "display_name": "Collections lookup", // This is new
                 "doc_count_error_upper_bound": 0,
                 "sum_other_doc_count": 378095,
                 "buckets": [
                     {
                         "key": "Excellence in Research Australia (ERA) - Collection",
-                        "doc_count": 52163
+                        "doc_count": 52163,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "School of Medicine Publications",
-                        "doc_count": 32747
+                        "doc_count": 32747,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "ResearcherID Downloads",
-                        "doc_count": 15487
+                        "doc_count": 15487,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "HERDC Pre-Audit",
-                        "doc_count": 14323
+                        "doc_count": 14323,
+                        "title": "This is the facet title"
                     },
                     {
                         "key": "Scopus Import",
-                        "doc_count": 13232
+                        "doc_count": 13232,
+                        "title": "This is the facet title"
                     }
                 ]
             },
@@ -5600,40 +5667,26 @@ export const facetData = {
     };
 
 // Make a list of allowed "aggregations" to render, as some aren't valid/needed
-export const allowedAggregations = ['journal_name_t_ft', 'genre_type_t_ft', 'subject_mi_lookup_exact', 'display_type_i_lookup_exact', 'date_year_t', 'keywords_mft', 'author_mft', 'scopus_doc_type_t_lookup_exact', 'author_id_mi_lookup_exact', 'ismemberof_mt_lookup_exact', 'subtype_t_ft'];
+// const allowedAggregations = ['journal_name_t_ft', 'genre_type_t_ft', 'subject_mi_lookup_exact', 'display_type_i_lookup_exact', 'date_year_t', 'keywords_mft', 'author_mft', 'scopus_doc_type_t_lookup_exact', 'author_id_mi_lookup_exact', 'ismemberof_mt_lookup_exact', 'subtype_t_ft'];
 
 // create an array of values using the allowedAggregations as a key to map data from thisData/facetData
-export const aggregations = allowedAggregations.map(key => {
-    // temp store all the allowed aggregation data
-    const thisData = facetData.aggregations[key];
-    // return the following data format to const aggregations
-    return {
-        aggregation: key, // The original key value for aggregations
-
-        title: null, // Waiting on abckend to supply
-
-        doc_count: thisData.sum_other_doc_count, // Pull the document count for this category/aggregate
-
-        facets: thisData.buckets.map(item => { // Have to map facets info from buckets
-            return {
-                title: item.key, // Some of the aggregate data's titles etc appear to be lookups which have the same data - so just made allowedAggregations to filter them for now.
-                key: item.key,
-                doc_count: item.doc_count
-            };
-        })
-    };
-});
-
-console.log(aggregations);
-
-// TEMPLATE
-//         aggregation: 'display_type_i', //aggregation.key
-//         title: 'Publication type', // this data is missing, ask backend to supply this data
-//         doc_count: 25341, // sum_other_doc_count
-//         facets: [{
-//             title: 'Journal Article', // buckets, // map to proper title from display_type_i_lookup_exact
-//             key: 179, // aggregations.its_title.buckets.key
-//             doc_count: 172277, // aggregations.its_title.buckets.doc_count
-//         }]
-//     }
-// ];
+// const aggregations = allowedAggregations.map(key => {
+//     // temp store all the allowed aggregation data
+//     const thisData = facetData.aggregations[key];
+//     // return the following data format to const aggregations
+//     return {
+//         aggregation: key, // The original key value for aggregations
+//
+//         title: null, // Waiting on abckend to supply
+//
+//         doc_count: thisData.sum_other_doc_count, // Pull the document count for this category/aggregate
+//
+//         facets: thisData.buckets.map(item => { // Have to map facets info from buckets
+//             return {
+//                 title: item.key, // Some of the aggregate data's titles etc appear to be lookups which have the same data - so just made allowedAggregations to filter them for now.
+//                 key: item.key,
+//                 doc_count: item.doc_count
+//             };
+//         })
+//     };
+// });

@@ -21,6 +21,15 @@
   .facetsCategoryTitle {
     margin: 6px 0 !important;
     font-weight: bold !important;
+    & span {
+      opacity: 0.5;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &.active {
+      border: 2px dashed green;
+    }
   }
   .facetsClearButton{
     opacity: 0.2;

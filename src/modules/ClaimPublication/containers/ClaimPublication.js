@@ -1,13 +1,14 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import * as actions from 'actions';
 import ClaimPublication from '../components/ClaimPublication';
 import {withRouter} from 'react-router-dom';
-import * as actions from 'actions';
 
 const mapStateToProps = (state) => {
     return {
         ...state.get('claimPublicationReducer'),
-        author: state.get('accountReducer').author
+        author: state.get('accountReducer').author,
+        authorLoading: state.get('accountReducer').authorLoading
     };
 };
 
