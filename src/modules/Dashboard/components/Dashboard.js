@@ -54,7 +54,6 @@ class Dashboard extends React.Component {
                 }
                 {
                     !loading && this.props.authorDetails &&
-                    <div className="layout-card">
                         <div className="columns is-multiline is-gapless">
                             <div className="column is-12 is-hidden-mobile">
                                 <DashboardAuthorProfile authorDetails={this.props.authorDetails}/>
@@ -76,21 +75,24 @@ class Dashboard extends React.Component {
                             }
 
                         </div>
-                    </div>
                 }
                 {
                     !loading && this.props.publicationsByYear &&
+                    <div className="columns">
+                        <div className="column">
                     <StandardCard className="barChart" title={txt.publicationsByYearChart.title}>
                         <AuthorsPublicationsPerYearChart
                             className="barChart"
                             {...this.props.publicationsByYear}
                             yAxisTitle={txt.publicationsByYearChart.yAxisTitle} />
                     </StandardCard>
+                        </div>
+                    </div>
                 }
                 {
                     !loading && this.props.publicationTypesCount &&
                     <div className="columns">
-                        <div className="column is-gapless is-4">
+                        <div className="column is-4">
                             <StandardCard className="donutChart" title={txt.publicationTypesCountChart.title}>
                                 <AuthorsPublicationTypesCountChart
                                     className="donutChart"
@@ -98,8 +100,8 @@ class Dashboard extends React.Component {
                             </StandardCard>
                         </div>
 
-                        <div className="column is-9">
-                            <StandardCard title="eSpace publications linked from: WOS/SCOPUS">
+                        <div className="column">
+                            <StandardCard className="card-full-height" title="eSpace publications linked from: WOS/SCOPUS">
                                 { this.props.loadingPublicationsStats && 'loading your stats...'}
                                 { this.props.publicationsStats && JSON.stringify(this.props.publicationsStats)}
                             </StandardCard>
