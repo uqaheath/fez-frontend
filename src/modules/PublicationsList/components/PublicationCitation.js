@@ -42,7 +42,7 @@ export default class PublicationCitation extends Component {
         const actions = this.props.actions && this.props.actions.length > 0 ?
             this.props.actions.map((action, index) => {
                 return (
-                    <div className="column is-narrow" key={index} >
+                    <div className="column is-narrow" key={index}>
                         {index === 0 ? (
                         <RaisedButton
                             secondary
@@ -73,7 +73,7 @@ export default class PublicationCitation extends Component {
 
                 {
                     this.props.actions && this.props.actions.length > 0 &&
-                    <div className="publicationActions columns is-gapless">
+                    <div className="publicationActions columns is-gapless action-buttons">
                         <div className="column is-hidden-mobile"/>
                             {actions}
                     </div>

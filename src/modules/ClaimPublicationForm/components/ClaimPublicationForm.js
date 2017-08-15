@@ -137,8 +137,8 @@ export default class ClaimPublicationForm extends Component {
                         <Alert type="info" title="Success"
                                message={'Publication claim has been submitted successfully...'} outsideLayout/>
                     }
-                    <div className="layout-card">
-                        <div className="columns">
+
+                        <div className="columns action-buttons">
                             <div className="column is-hidden-mobile"/>
                             <div className="column is-narrow-desktop">
                                 <RaisedButton
@@ -157,7 +157,6 @@ export default class ClaimPublicationForm extends Component {
                                 />
                             </div>
                         </div>
-                    </div>
                 </form>
             </StandardPage>
         );

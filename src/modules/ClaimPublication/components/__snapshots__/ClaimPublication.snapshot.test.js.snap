@@ -5,6 +5,7 @@ exports[`ClaimPublication test renders empty list 1`] = `
   title="Claim possible publications"
 >
   <StandardCard
+    className=""
     help={
       Object {
         "buttonLabel": "Ok",
@@ -54,6 +55,7 @@ exports[`ClaimPublication test renders list of publications and counts 1`] = `
   </section>
   <div>
     <StandardCard
+      className=""
       help={
         Object {
           "buttonLabel": "Ok",
@@ -1405,27 +1407,23 @@ exports[`ClaimPublication test renders list of publications and counts 1`] = `
       />
     </StandardCard>
     <div
-      className="layout-card"
+      className="columns is-gapless"
     >
       <div
-        className="columns"
+        className="column is-hidden-mobile"
+      />
+      <div
+        className="column is-narrow-desktop is-12-mobile is-pulled-right"
       >
-        <div
-          className="column is-hidden-mobile"
+        <RaisedButton
+          disabled={false}
+          fullWidth={true}
+          label="None of these publications are mine"
+          labelPosition="after"
+          onTouchTap={[Function]}
+          primary={false}
+          secondary={true}
         />
-        <div
-          className="column is-narrow-desktop is-12-mobile is-pulled-right"
-        >
-          <RaisedButton
-            disabled={false}
-            fullWidth={true}
-            label="None of these publications are mine"
-            labelPosition="after"
-            onTouchTap={[Function]}
-            primary={false}
-            secondary={true}
-          />
-        </div>
       </div>
     </div>
   </div>
@@ -1444,6 +1442,7 @@ exports[`ClaimPublication test renders loading screen while loading author data 
     />
   </div>
   <StandardCard
+    className=""
     help={
       Object {
         "buttonLabel": "Ok",
@@ -1485,6 +1484,7 @@ exports[`ClaimPublication test renders no results 1`] = `
     />
   </div>
   <StandardCard
+    className=""
     help={
       Object {
         "buttonLabel": "Ok",

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Field} from 'redux-form/immutable';
 
-import { TextField, StandardCard, PartialDateField } from 'uqlibrary-react-toolbox';
+import {TextField, StandardCard, PartialDateField} from 'uqlibrary-react-toolbox';
 import {ContributorsEditorField, PublicationSubtypeField} from 'modules/SharedComponents';
 import {validation, locale} from 'config';
 
@@ -54,7 +54,7 @@ export default class JournalArticleForm extends Component {
                             />
                         </div>
                         <div className="column">
-                            <Field component={ PartialDateField }
+                            <Field component={PartialDateField}
                                    disabled={this.props.submitting}
                                    name="rek_date"
                                    allowPartial
@@ -69,7 +69,10 @@ export default class JournalArticleForm extends Component {
                                    disabled={this.props.submitting}
                                    vocabId={this.props.vocabId}
                                    className="requiredField"
-                                   locale={{label: txt.information.fieldLabels.subtype, loading: locale.global.loading}}
+                                   locale={{
+                                       label: txt.information.fieldLabels.subtype,
+                                       loading: locale.global.loading
+                                   }}
                                    validate={[validation.required]}
                             />
                         </div>
@@ -114,8 +117,7 @@ export default class JournalArticleForm extends Component {
                                    disabled={this.props.submitting}
                                    floatingLabelText={txt.optional.fieldLabels.endPage}/>
                         </div>
-                    </div>
-                    <div className="columns">
+
                         <div className="column">
                             <Field component={TextField}
                                    name="fez_record_search_key_article_number.rek_article_number"

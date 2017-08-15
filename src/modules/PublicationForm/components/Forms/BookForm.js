@@ -35,7 +35,7 @@ export default class BookForm extends Component {
                                 rows={1}
                                 floatingLabelText={txt.information.fieldLabels.bookTitle}
                                 validate={[validation.required]}
-                                style={{marginBottom: '-12px'}} />
+                                style={{marginBottom: '-12px'}}/>
                         </div>
                     </div>
                     <div className="columns">
@@ -47,7 +47,7 @@ export default class BookForm extends Component {
                                 vocabId={this.props.vocabId}
                                 className="requiredField"
                                 locale={{label: txt.information.fieldLabels.subtype, loading: locale.global.loading}}
-                                validate={[validation.required]} />
+                                validate={[validation.required]}/>
                         </div>
                     </div>
                 </StandardCard>
@@ -57,7 +57,7 @@ export default class BookForm extends Component {
                         component={ContributorsEditorField}
                         name="authors"
                         locale={{contributorSuffix: txt.authors.suffix}}
-                        disabled={this.props.submitting} />
+                        disabled={this.props.submitting}/>
                 </StandardCard>
 
                 <StandardCard title={txt.editors.title} help={txt.editors.help}>
@@ -65,9 +65,8 @@ export default class BookForm extends Component {
                         component={ContributorsEditorField}
                         name="editors"
                         locale={{contributorSuffix: txt.editors.suffix}}
-                        disabled={this.props.submitting} />
+                        disabled={this.props.submitting}/>
                 </StandardCard>
-
             </div>
         );
     }
