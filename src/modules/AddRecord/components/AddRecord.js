@@ -92,11 +92,10 @@ export default class AddRecord extends React.Component {
             }
         ];
         return (
-            <div className="columns searchWrapper">
+            <div className="columns is-gapless is-multiline searchWrapper">
                 {/* Mobile search dashboard (progress bar) */}
                 <div className="column is-hidden-desktop is-hidden-tablet mobileWrapper">
-                    <PublicationListLoadingProgress loadingPublicationSources={this.props.loadingPublicationSources}
-                                                    mobile/>
+                    <PublicationListLoadingProgress loadingPublicationSources={this.props.loadingPublicationSources} mobile/>
                 </div>
                 {/* Search results */}
                 <div className="column is-9-desktop is-8-tablet is-12-mobile">
@@ -108,7 +107,7 @@ export default class AddRecord extends React.Component {
                         this.props.publicationsList.length > 0 &&
                         <StandardCard {...txt.searchResults}>
                             <div>{txt.searchResults.text.replace('[noOfResults]', this.props.publicationsList.length)}</div>
-                            <PublicationsList publicationsList={this.props.publicationsList} actions={actions}/>
+                            <PublicationsList publicationsList={this.props.publicationsList} customActions={actions}/>
                         </StandardCard>
                     }
 
@@ -121,7 +120,7 @@ export default class AddRecord extends React.Component {
 
                     {
                         !this.props.loadingSearch &&
-                        <div>
+                        <div className="layout-card">
                             <div className="columns action-buttons">
                                 <div className="column is-hidden-mobile"/>
                                 <div className="column is-narrow-desktop">
@@ -156,50 +155,43 @@ export default class AddRecord extends React.Component {
     render() {
         const txt = locale.pages.addRecord;
         return (
-            <div className="columns is-multiline">
-                <div className="column is-12">
-                    <StandardPage title={txt.title}>
-                        <ConfirmDialogBox onRef={ref => (this.confirmationBox = ref)}
-                                          onAction={this._navigateToDashboard}
-                                          locale={txt.confirmationDialog}/>
+            <StandardPage title={txt.title}>
+                <ConfirmDialogBox onRef={ref => (this.confirmationBox = ref)}
+                                  onAction={this._navigateToDashboard}
+                                  locale={txt.confirmationDialog}/>
 
-                        <div className="Stepper">
-                            <Stepper activeStep={this.state.stepperIndex} style={{padding: '0', margin: '-10px auto'}}>
-                                {
-                                    txt.stepper.map((step, index) => {
-                                        return (<Step key={index}>
-                                            <StepLabel
-                                                style={{
-                                                    textOverflow: 'ellipsis',
-                                                    overflow: 'hidden'
-                                                }}>{step.label}</StepLabel>
-                                        </Step>);
-                                    })
-                                }
-                            </Stepper>
-                        </div>
-                        <div>
-                            {
-                                this.state.stepperIndex === 0 &&
-                                <PublicationSearchForm
-                                    locale={txt.step1}
-                                    onSubmit={this._performSearch}/>
-                            }
-                            {
-                                this.state.stepperIndex === 1 &&
-                                this.renderSearchResultsStep() // TODO: should this be a separate component or it's ok like this?
-                            }
-                            {
-                                this.state.stepperIndex === 2 &&
-                                <PublicationForm
-                                    onFormSubmitSuccess={this._recordSaved}
-                                    onFormCancel={this._cancelWorkflow}
-                                    initialValues={this.state.initialValues}/>
-                            }
-                        </div>
-                    </StandardPage>
+                <div className="Stepper">
+                    <Stepper activeStep={this.state.stepperIndex} style={{padding: '0', margin: '-10px auto'}}>
+                        {
+                            txt.stepper.map((step, index) => {
+                                return (<Step key={index}>
+                                    <StepLabel
+                                        style={{textOverflow: 'ellipsis', overflow: 'hidden'}}>{step.label}</StepLabel>
+                                </Step>);
+                            })
+                        }
+                    </Stepper>
                 </div>
-            </div>
+                <div className="layout-fill">
+                    {
+                        this.state.stepperIndex === 0 &&
+                        <PublicationSearchForm
+                            locale={txt.step1}
+                            onSubmit={this._performSearch}/>
+                    }
+                    {
+                        this.state.stepperIndex === 1 &&
+                        this.renderSearchResultsStep() // TODO: should this be a separate component or it's ok like this?
+                    }
+                    {
+                        this.state.stepperIndex === 2 &&
+                        <PublicationForm
+                            onFormSubmitSuccess={this._recordSaved}
+                            onFormCancel={this._cancelWorkflow}
+                            initialValues={this.state.initialValues}/>
+                    }
+                </div>
+            </StandardPage>
         );
     }
 }
