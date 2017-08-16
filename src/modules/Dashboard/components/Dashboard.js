@@ -78,36 +78,40 @@ class Dashboard extends React.Component {
                 }
                 {
                     !loading && this.props.publicationsByYear &&
-                    <div className="columns">
-                        <div className="column">
+
                     <StandardCard className="barChart" title={txt.publicationsByYearChart.title}>
+                        <div className="barChart">
                         <AuthorsPublicationsPerYearChart
-                            className="barChart"
                             {...this.props.publicationsByYear}
                             yAxisTitle={txt.publicationsByYearChart.yAxisTitle} />
-                    </StandardCard>
                         </div>
-                    </div>
+                    </StandardCard>
                 }
-                {
-                    !loading && this.props.publicationTypesCount &&
-                    <div className="columns">
+                <div className="columns">
+                    {
+                        !loading && this.props.publicationTypesCount &&
                         <div className="column is-4">
-                            <StandardCard className="donutChart" title={txt.publicationTypesCountChart.title}>
+                            <StandardCard className="donutChart card-full-height"
+                                          title={txt.publicationTypesCountChart.title}>
                                 <AuthorsPublicationTypesCountChart
                                     className="donutChart"
-                                    series={[{name: txt.publicationTypesCountChart.title, data: this.props.publicationTypesCount}]} />
+                                    series={[{
+                                        name: txt.publicationTypesCountChart.title,
+                                        data: this.props.publicationTypesCount
+                                    }]}/>
                             </StandardCard>
                         </div>
-
+                    }
+                    {
+                        !loading && this.props.publicationTypesCount &&
                         <div className="column">
                             <StandardCard className="card-full-height" title="eSpace publications linked from: WOS/SCOPUS">
                                 { this.props.loadingPublicationsStats && 'loading your stats...'}
                                 { this.props.publicationsStats && JSON.stringify(this.props.publicationsStats)}
                             </StandardCard>
                         </div>
-                    </div>
                 }
+                </div>
                 {
                     !loading && this.props.publicationsList &&
                     <StandardCard title={txt.myPublications.title}>
